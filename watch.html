@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="The Just Chatting Twitch alternative live streaming service">
+    <title>Spiel-Watch</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/GunViewer.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/mediabuffer.js"></script>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Spiel</h1>
+      </div>
+      <div>
+        <nav>
+          <script>
+            function redirect(page) {
+              sessionStorage.setItem('content', page)
+              window.location.href = "/";
+            }
+          </script>
+          <div>
+            <ul>
+              <li><button onclick="redirect('')">Home</button></li>
+              <li><button onclick="redirect('live')">Live</button></li>
+              <li><button onclick="redirect('')">Guides</button></li>
+              <li><button onclick="redirect('')">Support</button></li>
+            </ul>
+          </div>
+          <hr>
+          <div>
+            <form class="form-inline">
+              <input style="width: 75%" id="search" type="text" placeholder="Search.." name="search">
+              <input style="width: 25%" type="submit" value="Search" onclick="urlParams.set('search', document.getElementById('search').value)">
+            </form>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <article>
+      <div class="center">
+        <video id="video" width="45%" autoplay/>
+        <script>
+          const urlParams = new URLSearchParams(window.location.search);
+          const streamer = urlParams.get('search').toString();
+          
+          //Basic configurations for mime types
+          const MIMETYPE_VIDEO_AUDIO = 'video/webm; codecs="vp8,opus"';
+          const MIMETYPE_VIDEO_ONLY = 'video/webm; codecs="vp8"';
+
+          //Configure GunViewer 
+          var viewer_config = {
+            mimeType: MIMETYPE_VIDEO_AUDIO,
+            streamerId: "video",//ID of the streamer
+            debug: false,//For debug logs  
+          }
+
+          var gunViewer = new GunViewer(viewer_config);
+
+          //Configure GUN to pass to streamer
+          var peers = ['https://gunmeetingserver.herokuapp.com/gun'];
+          var opt = { peers: peers, localStorage: false, radisk: false };
+          var gunDB = Gun(opt);
+
+          //Get data from gun and pass along to viewer
+          gunDB.get(streamer).on(function (data) {
+            //Make sure the video is in the html or create on here dynamically.
+            gunViewer.onStreamerData(data);
+          });
+        </script>
+      </div>
+      <hr>
+      <div class="center">
+        <button onclick="window.document.getElementById('shareDialog').showModal()">Share Creator</button>
+      </div>
+      <dialog id="shareDialog">
+      <div id="modal" class="center">
+        <div class="center">
+          <ul>
+            <li><a id="facebook" href="" target="_blank">Facebook</a></li>
+            <li><a id="whatsapp" href="" target="_blank">WhatsApp</a></li>
+            <li><a id="weibo" href="">Weibo</a></li>
+            <li><a id="twitter" href="">Twitter</a></li>
+            <li><a id="reddit" href="">Reddit</a></li>
+          </ul>
+          <script>
+            document.getElementById("facebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + window.location;
+            document.getElementById("whatsapp").href = "https://api.whatsapp.com/send?text=" + window.location;
+            document.getElementById("weibo").href = "http://service.weibo.com/share/share.php?url=" + window.location + "&appkey=&title=&pic=&ralateUid=&language=zh_cn";
+            document.getElementById("twitter").href = "https://twitter.com/intent/tweet?url=" + window.location;
+            document.getElementById("reddit").href = "https://www.reddit.com/submit?url=" + window.location;
+          </script>
+        </div>
+        <div class="center">
+          <button onclick="window.document.getElementById('shareDialog').close()">Close</button>
+        </div>
+      </div>
+    </dialog>
+    </article>
+    <footer>
+      <pre><b>Spiel</b></pre>
+      <button>Donate</button>
+    </footer>
+  </body>
+</html>

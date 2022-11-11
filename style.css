@@ -1,0 +1,216 @@
+:root {
+  --main-bg-color: #3b3d3d;
+  --second-bg-color: #282626;
+  --txt-color: #49cab0;
+}
+
+body {
+	background-color: var(--main-bg-color);
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+header {
+  padding: 48px;
+  text-align: center;
+  background-color: var(--second-bg-color);
+  color: var(--txt-color);
+}
+
+button {
+  background-color: var(--second-bg-color);
+  border-color: var(--txt-color);
+  color: var(--txt-color);
+  padding: 14px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 8px;
+  transition-duration: 0.4s;
+  width: 225px;
+  border: 1px solid var(--main-bg-color);
+}
+
+button:hover {
+  background-color: var(--txt-color);
+  border-color: var(--txt-color);
+  color: var(--second-bg-color);
+}
+
+hr {
+  border: 1px solid var(--txt-color);
+}
+
+.form-inline {
+  display: flex;
+  flex-direction: row
+}
+
+.liveButton {
+  background-color: var(--second-bg-color);
+  border-color: var(--txt-color);
+  color: var(--txt-color);
+  padding: 14px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+  border-radius: 8px;
+  transition-duration: 0.4s;
+  width: 250px;
+  float: center;
+  border: 1px solid var(--main-bg-color);
+}
+
+.liveButton:hover {
+  background-color: var(--txt-color);
+  border-color: var(--txt-color);
+  color: var(--second-bg-color);
+}
+
+label {
+  font-size: 24px;
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+  color: var(--txt-color);
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 2px solid var(--txt-color);
+  border-radius: 4px;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+  text-align: center;
+  display: inline-block;
+  font-size: 24px;
+  background-color: var(--second-bg-color);
+  border: solid;
+  border-width: 1px;
+  color: var(--txt-color);
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition-duration: 0.4s;
+  width: 100%;
+  float: center;
+}
+
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
+  background-color: var(--txt-color);
+  color: var(--second-bg-color);
+}
+
+.lAside {
+  width: 16%;
+  padding: 15px;
+  margin: 15px;
+  float: left;
+  background-color: var(--second-bg-color);
+}
+
+.rAside {
+  width: 32%;
+  padding: 15px;
+  margin: 15px;
+  float: right;
+  background-color: var(--second-bg-color);
+}
+
+select {
+  width: 100%;
+  padding: 16px 20px;
+  border: solid;
+  border-color: var(--main-bg-color);
+  color: var(--txt-color);
+  border-width: 1px;
+  border-radius: 4px;
+  background-color: var(--second-bg-color);
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+dialog {
+  padding: 0.6rem;
+  border: 0;
+  border-radius: 0.6rem;
+  background-color: var(--second-bg-color);
+  box-shadow: 0 0 1em var(--txt-color);
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+ul {
+  list-style-type: none;
+  margin: 5px;
+  padding: 0;
+}
+
+ul li {
+  margin: 5px;
+  display: inline;
+}
+
+a {
+  color: var(--txt-color);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--main-bg-color);
+}
+
+h1 {
+  color: var(--txt-color);
+  text-align: center;
+  display: block;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+form {
+  background-color: var(--second-bg-color);
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+label {
+  display: block;
+  text-align: center;
+}
+
+footer {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--second-bg-color);
+  color: var(--txt-color);
+  text-align: center;
+}
+
+pre {
+  display: block;
+  color: var(--txt-color);
+  font-family: monospace;
+  white-space: pre;
+  padding: 1em;
+  margin: 1em 0;
+}

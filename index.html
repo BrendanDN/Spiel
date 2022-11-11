@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="The Just Chatting Twitch alternative live streaming service">
+    <title>Spiel</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="./app.js" ></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/GunRecorder.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/GunStreamer.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/GunViewer.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/mediabuffer.js"></script>
+  </head>
+  <body id="app">
+    <header>
+      <div>
+        <h1>Spiel</h1>
+      </div>
+      <div>
+        <nav>
+          <div>
+            <ul>
+              <li><button onclick="insertParam('content', 'home')">Home</button></li>
+              <li><button onclick="insertParam('content', 'live')">Live</button></li>
+              <li><button onclick="insertParam('content', 'home')">Guides</button></li>
+              <li><button onclick="insertParam('content', 'home')">Support</button></li>
+            </ul>
+          </div>
+          <hr>
+          <div id="auth"></div>
+        </nav>
+      </div>
+    </header>
+    <script>
+      let gun = new Gun();
+      let user = gun.user().recall({sessionStorage: true});
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const content = urlParams.get('content');
+
+      function insertParam(key, value) {
+        key = encodeURIComponent(key);
+        value = encodeURIComponent(value);
+
+        // kvp looks like ['key1=value1', 'key2=value2', ...]
+        var kvp = document.location.search.substr(1).split('&');
+        let i=0;
+
+        for(; i<kvp.length; i++){
+          if (kvp[i].startsWith(key + '=')) {
+            let pair = kvp[i].split('=');
+            pair[1] = value;
+            kvp[i] = pair.join('=');
+            break;
+          }
+        }
+
+        if(i >= kvp.length){
+          kvp[kvp.length] = [key,value].join('=');
+        }
+
+        // can return this or...
+        let params = kvp.join('&');
+
+        // reload page with new params
+        document.location.search = params;
+      }
+
+      if (!urlParams.has('content')) {
+        insertParam('content', 'home');
+      } 
+      
+      function signout() {
+        try {
+           user.leave();
+        } catch(err) {
+          alert(err);
+        } finally {
+          location.reload();
+        }
+      }
+      
+      if (user.is) {
+        document.getElementById("auth").innerHTML = `
+          <ul>
+            <li><button onclick="signout()">Sign Out</button></li>
+          </ul>
+        `;
+
+        switch(content) {
+        case 'watch':
+          document.write(watch);
+          break;
+        case 'auth':
+          document.write(home);
+          break;
+        case 'live':
+          document.write(live);
+          break;
+        case 'home':
+          document.write(home);
+          break;
+        default:
+          document.write(err404)
+        }
+      } else {
+        document.getElementById("auth").innerHTML = `
+          <ul>
+            <li><button onclick="insertParam('content', 'auth')">Sign In</button></li>
+            <li><button onclick="insertParam('content', 'auth')">Sign Up</button></li>
+          </ul>
+        `;
+
+        switch(content) {
+        case 'watch':
+          document.write(watch);
+          break;
+        case 'auth':
+          document.write(auth);
+          break;
+        case 'live':
+          document.write(auth);
+          break;
+        case 'home':
+          document.write(home);
+          break;
+        default:
+          document.write(err404)
+        }
+      }
+    </script>
+    <footer>
+      <pre><b>Spiel</b></pre>
+    </footer>
+  </body>
+</html>
