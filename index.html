@@ -7,7 +7,7 @@
     <title>Spiel</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
     <script src="./app.js" ></script>
-    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/GunRecorder.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/GunStreamer.js"></script>
@@ -35,7 +35,8 @@
       </div>
     </header>
     <script>
-      let gun = new Gun();
+      //Configure GUN to pass to streamer
+      const gun = Gun();
       let user = gun.user().recall({sessionStorage: true});
 
       const urlParams = new URLSearchParams(window.location.search);
@@ -75,11 +76,10 @@
       
       function signout() {
         try {
-           user.leave();
+          user.leave();
+          location.reload();
         } catch(err) {
           alert(err);
-        } finally {
-          location.reload();
         }
       }
       
@@ -134,6 +134,7 @@
     </script>
     <footer>
       <pre><b>Spiel</b></pre>
+      <button>Donate</button>
     </footer>
   </body>
 </html>

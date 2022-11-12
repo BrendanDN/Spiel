@@ -14,9 +14,9 @@ const live = `
     </form>
   </aside>
   <div>
+    <div id="chat"></div>
     <video id="record_video" width="45%" autoplay controls muted/>
     <video id="video" width="45%" autoplay muted/>
-    <div></div>
   </div>
   <script>
     const streamer = user.is.pub;
@@ -48,7 +48,7 @@ const live = `
     var gunViewer = new GunViewer(viewer_config);
 
     //Configure GUN to pass to streamer
-    var peers = ['https://gunmeetingserver.herokuapp.com/gun'];
+    var peers = ['https://spiel-server-eu.herokuapp.com/gun', 'https://spiel-server-us.herokuapp.com/gun'];
     var opt = { peers: peers, localStorage: false, radisk: false };
     var gunDB = Gun(opt);
 
@@ -57,10 +57,14 @@ const live = `
       gunViewer.onStreamerData(data);
     });
 
+    gunDB.get(STREAM_ID).get('test').on(function (data) {
+      document.getElementById('chat').innerHTML = '<p>' + data + '</p>'
+    });
+
 
     //Config for the GUN GunStreamer
     var streamer_config = {
-      dbRecord: "gunmeeting",//The root of the streams
+      dbRecord: "streamers",//The root of the streams
       streamId: STREAM_ID,//The user id you wanna stream  
       gun: gunDB,//Gun instance
       debug: false,//For debug logs
@@ -93,9 +97,9 @@ const live = `
       video_id: "record_video",//Video html element id
       onDataAvailable: gunStreamer.onDataAvailable,//MediaRecorder data available callback
       onRecordStateChange: onRecordStateChange,//Callback for recording state
-      // audioBitsPerSecond: 6000,//Audio bits per second this is the lowest quality
-      // videoBitsPerSecond: 100000,//Video bits per second this is the lowest quality
-      recordInterval: 800,//Interval of the recorder higher will increase delay but more buffering. Lower will not do much. Due limitiation of webm
+      //audioBitsPerSecond: 6000,//Audio bits per second this is the lowest quality
+      //videoBitsPerSecond: 100000,//Video bits per second this is the lowest quality
+      recordInterval: 700,//Interval of the recorder higher will increase delay but more buffering. Lower will not do much. Due limitiation of webm
       cameraOptions: CAMERA_OPTIONS,//The camera and screencast options see constant
       // experimental: true,//This is custom time interval and very unstable with audio. Only video is more stable is interval quick enough? Audio
       debug: false//For debug logs
@@ -109,29 +113,25 @@ const live = `
 
 const watch = `
 <article>
-  <div>
-    <aside id="chat" class="rAside">
-      <ul>
-        <li><button onclick="gun.user(streamer).get('react').put('👋')">👋 Hi!</button></li>
-        <li><button onclick="gun.user(streamer).get('react').put('🤣')">🤣 LUL</button></li>
-        <li><button onclick="gun.user(streamer).get('react').put('😞')">😞 NOOOOO</button></li>
-        <li><button onclick="gun.user(streamer).get('react').put('😨')">😨 what...</button></li>
-        <li><button onclick="gun.user(streamer).get('react').put('😴')">😴 Zzz</button></li>
-        <li><button onclick="gun.user(streamer).get('react').put('🤟')">🤟 Luv Ya</button></li>
-        <li><button onclick="gun.user(streamer).get('react').put('😎')">😎 Cool</button></li>
-        <li><button onclick="gun.user(streamer).get('react').put('🔥')">🔥 FIRE!</button></li>
-      </ul>
-      <div id="chatButton"></div>
-    </aside>
-  </div>
+  <aside class="rAside">
+    <div id="chat"></div>
+    <ul>
+      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(usrPub).put('👋')">👋 Hi!</button></li>
+      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(usrPub).put('🤣')">🤣 LUL</button></li>
+      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(usrPub).put('😞')">😞 NOOOOO</button></li>
+      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(usrPub).put('😨')">😨 what...</button></li>
+      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(usrPub).put('😴')">😴 Zzz</button></li>
+      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(usrPub).put('🤟')">🤟 Luv Ya</button></li>
+      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(usrPub).put('😎')">😎 Cool</button></li>
+      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(usrPub).put('🔥')">🔥 FIRE!</button></li>
+    </ul>
+  </aside>
   <div class="center">
     <video id="video" width="45%" autoplay/>
     <script>
       const streamer = urlParams.get('search').toString();
-
-      gun.user(streamer).get('react').on(function(chat) {
-        console.log(chat);
-      });
+      const usrPub = user.is.pub;
+      let arr = [] 
           
       //Basic configurations for mime types
       const MIMETYPE_VIDEO_AUDIO = 'video/webm; codecs="vp8,opus"';
@@ -147,7 +147,7 @@ const watch = `
       var gunViewer = new GunViewer(viewer_config);
 
       //Configure GUN to pass to streamer
-      var peers = ['https://gunmeetingserver.herokuapp.com/gun'];
+      var peers = ['https://spiel-server-eu.herokuapp.com/gun', 'https://spiel-server-us.herokuapp.com/gun'];
       var opt = { peers: peers, localStorage: false, radisk: false };
       var gunDB = Gun(opt);
 
@@ -155,6 +155,14 @@ const watch = `
       gunDB.get(streamer).on(function (data) {
         //Make sure the video is in the html or create on here dynamically.
         gunViewer.onStreamerData(data);
+      });
+
+      gunDB.get(streamer + '-chat').get('chat').map().on(function (data) {
+        if (arr.length >= 7) {
+          arr.shift();
+        }
+        arr.push(data);
+        document.getElementById('chat').innerHTML = '' + arr + '';
       });
     </script>
   </div>
@@ -205,9 +213,9 @@ const auth = `
       user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
         if (ack.err) {
           alert(ack.err);
-        } else {
-          location.reload();
         }
+          
+        location.reload();
       });
     }
 
