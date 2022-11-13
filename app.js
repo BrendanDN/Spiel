@@ -230,11 +230,11 @@ const watch = `
           <li><a id="reddit" href="">Reddit</a></li>
         </ul>
       <script>
-        document.getElementById("facebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + window.location;
-        document.getElementById("whatsapp").href = "https://api.whatsapp.com/send?text=" + window.location;
-        document.getElementById("weibo").href = "http://service.weibo.com/share/share.php?url=" + window.location + "&appkey=&title=&pic=&ralateUid=&language=zh_cn";
-        document.getElementById("twitter").href = "https://twitter.com/intent/tweet?url=" + window.location;
-        document.getElementById("reddit").href = "https://www.reddit.com/submit?url=" + window.location;
+        document.getElementById("facebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(window.location);
+        document.getElementById("whatsapp").href = "https://api.whatsapp.com/send?text=" + encodeURIComponent(window.location);
+        document.getElementById("weibo").href = "http://service.weibo.com/share/share.php?url=" + encodeURIComponent(window.location) + "&appkey=&title=&pic=&ralateUid=&language=zh_cn";
+        document.getElementById("twitter").href = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(window.location);
+        document.getElementById("reddit").href = "https://www.reddit.com/submit?url=" + encodeURIComponent(window.location);
       </script>
     </div>
       <div class="center">
