@@ -249,7 +249,7 @@ const auth = `
 <main>
   <div>
     <h1>Your Spiel Account</h1>
-    <form>
+    <form class="center">
       <span id="error" style="color:red;"></span>
       <label for="alias">Username:</label><br>
       <input type="text" id="alias" name="username"></input><br><br>

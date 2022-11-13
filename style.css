@@ -6,20 +6,20 @@
 
 body {
   min-height: 400px;
-  margin-bottom: 100px;
+  margin-bottom: 15rem;
   clear: both;
 	background-color: var(--main-bg-color);
   font-family: 'Trebuchet MS', sans-serif;
 }
 
 main {
-  margin: 0;
-  padding: 5px;
+  margin: 0rem;
+  padding: 0.5rem;
   background-color: var(--main-bg-color);
 }
 
 header {
-  padding: 48px;
+  padding: 4.8rem;
   text-align: center;
   background-color: var(--second-bg-color);
   color: var(--txt-color);
@@ -29,16 +29,16 @@ button {
   background-color: var(--second-bg-color);
   border-color: var(--txt-color);
   color: var(--txt-color);
-  padding: 14px 40px;
+  padding: 1.4rem 4rem;
   margin: auto;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-  border-radius: 8px;
+  font-size: 1.6rem;
+  border-radius: 0.8rem;
   transition-duration: 0.4s;
-  width: 225px;
-  border: 1px solid var(--main-bg-color);
+  max-width: 23rem;
+  border: 0.1rem solid var(--main-bg-color);
 }
 
 button:hover {
@@ -48,7 +48,7 @@ button:hover {
 }
 
 hr {
-  border: 1px solid var(--txt-color);
+  border: 0.1rem solid var(--txt-color);
 }
 
 .form-inline {
@@ -60,16 +60,16 @@ hr {
   background-color: var(--second-bg-color);
   border-color: var(--txt-color);
   color: var(--txt-color);
-  padding: 14px 40px;
+  padding: 1.4rem 4.0rem;
   text-align: center;
   text-decoration: none;
   display: block;
-  font-size: 16px;
-  border-radius: 8px;
+  font-size: 1.6rem;
+  border-radius: 0.8rem;
   transition-duration: 0.4s;
-  width: 250px;
+  max-width: 25rem;
   float: center;
-  border: 1px solid var(--main-bg-color);
+  border: 0.1rem solid var(--main-bg-color);
 }
 
 .liveButton:hover {
@@ -79,34 +79,34 @@ hr {
 }
 
 label {
-  font-size: 24px;
-  padding: 12px 12px 12px 0;
+  font-size: 2.4rem;
+  padding: 1.2rem 1.2rem 1.2rem 0;
   display: inline-block;
   color: var(--txt-color);
 }
 
 input[type=text], input[type=password] {
   width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
+  padding: 1.2rem 2.0rem;
+  margin: 0.8rem 0;
   box-sizing: border-box;
-  border: 2px solid var(--txt-color);
-  border-radius: 4px;
+  border: 0.2rem solid var(--txt-color);
+  border-radius: 0.4rem;
 }
 
 input[type=button], input[type=submit], input[type=reset] {
   text-align: center;
   display: inline-block;
-  font-size: 24px;
+  font-size: 2.4rem;
   background-color: var(--second-bg-color);
   border: solid;
-  border-width: 1px;
+  border-width: 0.1rem;
   color: var(--txt-color);
-  padding: 16px 32px;
+  padding: 1.6rem 3.2rem;
   text-decoration: none;
-  margin: 4px 2px;
+  margin: 0.4rem 0.2rem;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 0.8rem;
   transition-duration: 0.4s;
   width: 100%;
   float: center;
@@ -119,28 +119,28 @@ input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
 
 .lAside {
   width: 30%;
-  padding: 15px;
-  margin: 15px;
+  padding: 1.5rem;
+  margin: 1.5rem;
   float: left;
   background-color: var(--second-bg-color);
 }
 
 .rAside {
   width: 30%;
-  padding: 15px;
-  margin: 15px;
+  padding: 1.5rem;
+  margin: 1.5rem;
   float: right;
   background-color: var(--second-bg-color);
 }
 
 select {
   width: 100%;
-  padding: 16px 20px;
+  padding: 1.6rem 2rem;
   border: solid;
   border-color: var(--main-bg-color);
   color: var(--txt-color);
-  border-width: 1px;
-  border-radius: 4px;
+  border-width: 0.1rem;
+  border-radius: 0.4rem;
   background-color: var(--second-bg-color);
 }
 
@@ -150,7 +150,7 @@ select {
   align-items: center;
   text-align: center;
   flex-direction: column;
-  margin: 25px;
+  margin: 2.5rem;
 }
 
 dialog {
@@ -167,13 +167,13 @@ dialog:backdrop {
 
 ul {
   list-style-type: none;
-  margin: 5px;
+  margin: 0.5rem;
   padding: 0;
   overflow: auto;
 }
 
 ul li {
-  margin: 5px;
+  margin: 0.5rem;
   display: inline;
 }
 
@@ -222,9 +222,9 @@ p {
 
 form {
   background-color: var(--second-bg-color);
-  border-radius: 20px;
+  border-radius: 2rem;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 2rem;
 }
 
 label {
@@ -234,9 +234,9 @@ label {
 
 footer {
   position: fixed;
-  bottom: 0px;
+  bottom: 0rem;
   width: 100%;
-  height: 100px;
+  min-height: 150px;
   background-color: var(--second-bg-color);
   color: var(--txt-color);
   text-align: center;
