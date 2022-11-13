@@ -8,18 +8,26 @@ const err404 = `
 const live = `
 <article>
   <aside class="lAside">
-    <form>
-      <button class="liveButton" type="button" onclick="gunRecorder.startCamera()">Start Camera</button>
-      <button class="liveButton" id="record_button" type="button" onclick="gunRecorder.record()">Start Recording</button>
-    </form>
+    <button class="liveButton" type="button" onclick="gunRecorder.startCamera()">Start Camera</button>
+    <button class="liveButton" id="record_button" type="button" onclick="gunRecorder.record()">Start Recording</button>
+    <hr>
+    <button onclick="window.document.getElementById('shareDialog').showModal()">Share Stream</button>
   </aside>
   <div>
-    <div id="chat"></div>
-    <video id="record_video" width="45%" autoplay controls muted/>
-    <video id="video" width="45%" autoplay muted/>
+    <div class="center">
+      <div>
+        <h5>Emotes: </h5>
+        <div id="chat"></div>
+      </div>
+      <video id="record_video" width="45%" autoplay controls muted/>
+      <video id="video" width="45%" autoplay muted/>
+    </div>
   </div>
   <script>
     const streamer = user.is.pub;
+    const winLoc = window.location.origin + "/?content=watch%26search=" + streamer;
+    let arr = []; 
+    
     const MIMETYPE_VIDEO_AUDIO = 'video/webm; codecs="opus,vp8"';
     const MIMETYPE_VIDEO_ONLY = 'video/webm; codecs="vp8"';
     const MIMETYPE_AUDIO_ONLY = 'video/webm; codecs="opus"';
@@ -57,10 +65,15 @@ const live = `
       gunViewer.onStreamerData(data);
     });
 
-    gunDB.get(STREAM_ID).get('test').on(function (data) {
-      document.getElementById('chat').innerHTML = '<p>' + data + '</p>'
-    });
+    gunDB.get(streamer + '-chat').get('chat').map().on(function (data) {
+      if (arr.length >= 7) {
+        arr.shift();
+      }
+      
+      arr.push(data);
 
+      document.getElementById('chat').innerHTML = '<p style="font-size: 150%">' + arr.join("") + '<p/>';
+    });
 
     //Config for the GUN GunStreamer
     var streamer_config = {
@@ -85,6 +98,7 @@ const live = `
       switch (state) {
         case recordState.RECORDING:
           recordButton.innerText = "Stop recording";
+          gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put(' Welcome! Were Live: ')
           break;
         default:
           recordButton.innerText = "Start recording";
@@ -108,30 +122,63 @@ const live = `
     //Init the recorder
     const gunRecorder = new GunRecorder(recorder_config);
   </script>
+  <dialog id="shareDialog">
+    <div id="modal" class="center">
+      <div class="center">
+        <ul>
+          <li><a id="facebook" href="" target="_blank">Facebook</a></li>
+          <li><a id="whatsapp" href="" target="_blank">WhatsApp</a></li>
+          <li><a id="weibo" href="">Weibo</a></li>
+          <li><a id="twitter" href="">Twitter</a></li>
+          <li><a id="reddit" href="">Reddit</a></li>
+        </ul>
+      <script>
+        window.document.getElementById("facebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + winLoc;
+        window.document.getElementById("whatsapp").href = "https://api.whatsapp.com/send?text=Im Live: " + winLoc;
+        window.document.getElementById("weibo").href = "http://service.weibo.com/share/share.php?url=&appkey=&title=Im Live: " + winLoc + "&pic=&ralateUid=&language=zh_cn";
+        window.document.getElementById("twitter").href = "https://twitter.com/intent/tweet?url=Im Live: " + winLoc;
+        window.document.getElementById("reddit").href = "https://www.reddit.com/submit?url=Im Live: " + winLoc;
+      </script>
+    </div>
+      <div class="center">
+        <button onclick="window.document.getElementById('shareDialog').close()">Close</button>
+      </div>
+    </div>
+  </dialog>
 </article>
 `;
 
 const watch = `
 <article>
   <aside class="rAside">
-    <div id="chat"></div>
     <ul>
-      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(usrPub).put('👋')">👋 Hi!</button></li>
-      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(usrPub).put('🤣')">🤣 LUL</button></li>
-      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(usrPub).put('😞')">😞 NOOOOO</button></li>
-      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(usrPub).put('😨')">😨 what...</button></li>
-      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(usrPub).put('😴')">😴 Zzz</button></li>
-      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(usrPub).put('🤟')">🤟 Luv Ya</button></li>
-      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(usrPub).put('😎')">😎 Cool</button></li>
-      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(usrPub).put('🔥')">🔥 FIRE!</button></li>
+      <li><button onclick="emotes('👋')">👋 Hi!</button></li>
+      <li><button onclick="emotes('🤣')">🤣 LUL</button></li>
+      <li><button onclick="emotes('😞')">😞 NOOOOO</button></li>
+      <li><button onclick="emotes('😨')">😨 what...</button></li>
+      <li><button onclick="emotes('😴')">😴 Zzz</button></li>
+      <li><button onclick="emotes('🤟')">🤟 Luv Ya</button></li>
+      <li><button onclick="emotes('😎')">😎 Cool</button></li>
+      <li><button onclick="emotes('🔥')">🔥 FIRE!</button></li>
     </ul>
   </aside>
   <div class="center">
+    <div>
+      <h5>Emotes: </h5>
+      <div id="chat"></div>
+    </div>
     <video id="video" width="45%" autoplay/>
     <script>
       const streamer = urlParams.get('search').toString();
-      const usrPub = user.is.pub;
-      let arr = [] 
+      let arr = []
+
+      function emotes(emoji) {
+        if (user.is) {
+          gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put(emoji)
+        } else {
+          insertParam('content', 'auth');
+        }
+      }
           
       //Basic configurations for mime types
       const MIMETYPE_VIDEO_AUDIO = 'video/webm; codecs="vp8,opus"';
@@ -162,7 +209,7 @@ const watch = `
           arr.shift();
         }
         arr.push(data);
-        document.getElementById('chat').innerHTML = '' + arr + '';
+        document.getElementById('chat').innerHTML = '<p style="font-size: 150%">' + arr.join("") + '</p>';
       });
     </script>
   </div>
@@ -234,7 +281,7 @@ const auth = `
 
 const home = `
 <article>
-  <h1>Creator Spotlight</h1>
-  <pre>Share This Article</pre>
+  <h1>Welcome! :)</h1>
+  <p>The Just Chatting Twitch alternative live streaming service</p>
 </article>
 `;

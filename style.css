@@ -138,6 +138,7 @@ select {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   flex-direction: column;
 }
 
@@ -157,6 +158,7 @@ ul {
   list-style-type: none;
   margin: 5px;
   padding: 0;
+  overflow: auto;
 }
 
 ul li {
