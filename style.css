@@ -5,8 +5,17 @@
 }
 
 body {
+  min-height: 400px;
+  margin-bottom: 100px;
+  clear: both;
 	background-color: var(--main-bg-color);
   font-family: 'Trebuchet MS', sans-serif;
+}
+
+main {
+  margin: 0;
+  padding: 5px;
+  background-color: var(--main-bg-color);
 }
 
 header {
@@ -21,6 +30,7 @@ button {
   border-color: var(--txt-color);
   color: var(--txt-color);
   padding: 14px 40px;
+  margin: auto;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -108,7 +118,7 @@ input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
 }
 
 .lAside {
-  width: 16%;
+  width: 30%;
   padding: 15px;
   margin: 15px;
   float: left;
@@ -116,7 +126,7 @@ input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
 }
 
 .rAside {
-  width: 32%;
+  width: 30%;
   padding: 15px;
   margin: 15px;
   float: right;
@@ -140,6 +150,7 @@ select {
   align-items: center;
   text-align: center;
   flex-direction: column;
+  margin: 25px;
 }
 
 dialog {
@@ -150,7 +161,7 @@ dialog {
   box-shadow: 0 0 1em var(--txt-color);
 }
 
-dialog::backdrop {
+dialog:backdrop {
   background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -175,16 +186,38 @@ a:hover {
   color: var(--main-bg-color);
 }
 
+.container {
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  background-color: var(--second-bg-color);
+  color: var(--txt-color);
+  text-align: center;
+}
+
 h1 {
   color: var(--txt-color);
   text-align: center;
   display: block;
   font-size: 2em;
-  margin-top: 0.67em;
-  margin-bottom: 0.67em;
-  margin-left: 0;
-  margin-right: 0;
+  margin: 0.67em, 0;
   font-weight: bold;
+}
+
+.large-pre {
+  display: block;
+  font-size: 1em;
+  margin: 1.33em, 0;
+  font-weight: bold;
+}
+
+p {
+  color: var(--txt-color);
+  display: block;
+  margin: 1em, 0;
 }
 
 form {
@@ -200,9 +233,10 @@ label {
 }
 
 footer {
-  left: 0;
-  bottom: 0;
+  position: fixed;
+  bottom: 0px;
   width: 100%;
+  height: 100px;
   background-color: var(--second-bg-color);
   color: var(--txt-color);
   text-align: center;

@@ -1,23 +1,27 @@
 const err404 = `
-<article>
+<main>
   <pre><b>404 error</b></pre>
   <pre>Sorry, we could not find the content you were looking for!</pre>
-</article>
+</main>
 `;
 
 const live = `
-<article>
+<main>
   <aside class="lAside">
-    <button class="liveButton" type="button" onclick="gunRecorder.startCamera()">Start Camera</button>
-    <button class="liveButton" id="record_button" type="button" onclick="gunRecorder.record()">Start Recording</button>
+    <div class="center">
+      <button class="liveButton" type="button" onclick="gunRecorder.startCamera()">Start Camera</button>
+      <button class="liveButton" id="record_button" type="button" onclick="gunRecorder.record()">Start Recording</button>
+    </div>
     <hr>
-    <button onclick="window.document.getElementById('shareDialog').showModal()">Share Stream</button>
+    <div class="center">
+      <button onclick="window.document.getElementById('shareDialog').showModal()">Share Stream</button>
+    </div>
   </aside>
   <div>
     <div class="center">
-      <div>
-        <h5>Emotes: </h5>
-        <div id="chat"></div>
+      <div class="container">
+        <pre class="large-pre"><b>Emotes: </b></pre>
+        <p style="font-size: 150%" id="chat"></p>
       </div>
       <video id="record_video" width="45%" autoplay controls muted/>
       <video id="video" width="45%" autoplay muted/>
@@ -65,14 +69,12 @@ const live = `
       gunViewer.onStreamerData(data);
     });
 
-    gunDB.get(streamer + '-chat').get('chat').map().on(function (data) {
+    gunDB.get(STREAM_ID + '-chat').map().on(function (data) {
       if (arr.length >= 7) {
         arr.shift();
       }
-      
       arr.push(data);
-
-      document.getElementById('chat').innerHTML = '<p style="font-size: 150%">' + arr.join("") + '<p/>';
+      document.getElementById('chat').innerHTML = arr.join("");
     });
 
     //Config for the GUN GunStreamer
@@ -98,7 +100,7 @@ const live = `
       switch (state) {
         case recordState.RECORDING:
           recordButton.innerText = "Stop recording";
-          gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put(' Welcome! Were Live: ')
+          gunDB.get(STREAM_ID + '-chat').get(user.is.pub).put(' Welcome! Were Live: ')
           break;
         default:
           recordButton.innerText = "Start recording";
@@ -145,11 +147,11 @@ const live = `
       </div>
     </div>
   </dialog>
-</article>
+</main>
 `;
 
 const watch = `
-<article>
+<main>
   <aside class="rAside">
     <ul>
       <li><button onclick="emotes('👋')">👋 Hi!</button></li>
@@ -163,22 +165,14 @@ const watch = `
     </ul>
   </aside>
   <div class="center">
-    <div>
-      <h5>Emotes: </h5>
-      <div id="chat"></div>
+    <div class="container">
+      <pre class="large-pre"><b>Emotes: </b><pre>
+      <pre style="font-size: 150%" id="chat"></pre>
     </div>
     <video id="video" width="45%" autoplay/>
     <script>
-      const streamer = urlParams.get('search').toString();
+      const streamer = urlParams.get('search');
       let arr = []
-
-      function emotes(emoji) {
-        if (user.is) {
-          gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put(emoji)
-        } else {
-          insertParam('content', 'auth');
-        }
-      }
           
       //Basic configurations for mime types
       const MIMETYPE_VIDEO_AUDIO = 'video/webm; codecs="vp8,opus"';
@@ -204,12 +198,20 @@ const watch = `
         gunViewer.onStreamerData(data);
       });
 
-      gunDB.get(streamer + '-chat').get('chat').map().on(function (data) {
+      function emotes(emoji) {
+        if (user.is) {
+          gunDB.get(streamer + '-chat').get(user.is.pub).put(emoji)
+        } else {
+          insertParam('content', 'auth');
+        }
+      }
+
+      gunDB.get(streamer + '-chat').map().on(function (data) {
         if (arr.length >= 7) {
           arr.shift();
         }
         arr.push(data);
-        document.getElementById('chat').innerHTML = '<p style="font-size: 150%">' + arr.join("") + '</p>';
+        document.getElementById('chat').innerHTML = arr.join("");
       });
     </script>
   </div>
@@ -240,48 +242,67 @@ const watch = `
       </div>
     </div>
   </dialog>
-</article>
+</main>
 `;
 
 const auth = `
-<article>
-  <h1>Your Spiel Account</h1>
-     <form>
+<main>
+  <div>
+    <h1>Your Spiel Account</h1>
+    <form>
       <span id="error" style="color:red;"></span>
       <label for="alias">Username:</label><br>
       <input type="text" id="alias" name="username"></input><br><br>
       <label for="pass">Password:</label><br>
       <input type="password" id="pass" name="password"></input><br><br>
       <input type="submit" value="Sign In" onclick="signin()"><br><br>
-      <input type="submit" value="Sign Up" onclick="signup()"><br><br>
+      <input type="submit" value="Sign Up" onclick="signup()"><br><br>  
     </form>
-  <script>
-    function signin() {
-      user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
-        if (ack.err) {
-          alert(ack.err);
-        }
+    <script>
+      function signin() {
+        user.leave();
+        user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
+          if (ack.err) {
+            alert(ack.err);
+          }
           
-        location.reload();
-      });
-    }
+          location.reload();
+        });
+      }
 
-    function signup() {
-      user.create(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
-        if (ack.err) {
-          alert(ack.err);
-        } else {
-          confirm("User created, to continue sign in!");
-        }
-      });
-    }
-  </script>
-</article>
+      function signup() {
+        user.create(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
+          if (ack.err) {
+            alert(ack.err);
+          } else {
+            confirm("User created, to continue sign in!");
+          }
+        });
+      }
+    </script>
+  </div>
+</main>
 `;
 
 const home = `
-<article>
-  <h1>Welcome! :)</h1>
-  <p>The Just Chatting Twitch alternative live streaming service</p>
-</article>
+<main>
+  <div class="center">
+    <h1>Welcome! :)</h1>
+    <p>The Just Chatting Twitch alternative live streaming service</p>
+  </div>
+  <!--
+  <hr>
+  <ul id="streams"></ul>
+  <script>
+    //Configure GUN to pass to streamer
+    var peers = ['https://spiel-server-eu.herokuapp.com/gun', 'https://spiel-server-us.herokuapp.com/gun'];
+    var opt = { peers: peers, localStorage: false, radisk: false };
+    var gunDB = Gun(opt);
+
+    gunDB.get('streams').map().on(function (data, id) {
+      document.getElementById('streams').innerHTML += '<li>' + id + '</li>'
+    });
+  </script>
+  -->
+</main>
 `;
