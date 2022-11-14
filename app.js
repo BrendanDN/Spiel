@@ -25,8 +25,8 @@ const live = `
         <pre class="large-pre"><b>Emotes: </b></pre>
         <p id="chat"></p>
       </div>
-      <video id="record_video" width="50%" autoplay controls muted/>
-      <video id="video" width="50%" autoplay muted/>
+      <video id="record_video" autoplay controls muted/>
+      <video id="video" autoplay muted/>
     </div>
   </div>
   <script>
@@ -155,7 +155,7 @@ const live = `
 const watch = `
 <main>
   <aside class="rAside">
-    <ul class="center">
+    <ul class="container">
       <li><button onclick="emotes('👋')">👋 Hi</button></li>
       <li><button onclick="emotes('🤣')">🤣 LUL</button></li>
       <li><button onclick="emotes('😞')">😞 L</button></li>
@@ -171,7 +171,7 @@ const watch = `
       <pre class="large-pre"><b>Emotes: </b></pre>
       <p id="chat"></p>
     </div>
-    <video id="video" width="50%" autoplay/>
+    <video id="video" autoplay/>
     <script>
       const streamer = urlParams.get('search');
       let arr = []
