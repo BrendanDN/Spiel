@@ -7,24 +7,26 @@ const err404 = `
 
 const live = `
 <main>
-  <aside class="lAside">
-    <div class="center">
-      <button class="liveButton" type="button" onclick="gunRecorder.startCamera()">Start Camera</button>
-      <button class="liveButton" id="record_button" type="button" onclick="gunRecorder.record()">Start Recording</button>
-    </div>
-    <hr>
-    <div class="center">
-      <button onclick="window.document.getElementById('shareDialog').showModal()">Share Stream</button>
-    </div>
-  </aside>
+  <div>
+    <aside class="lAside">
+      <div class="center">
+        <button class="liveButton" type="button" onclick="gunRecorder.startCamera()">Start Camera</button>
+        <button class="liveButton" id="record_button" type="button" onclick="gunRecorder.record()">Start Stream</button>
+      </div>
+      <hr>
+      <div class="center">
+        <button onclick="document.getElementById('shareDialog').showModal()">Share Stream</button>
+      </div>
+    </aside>
+  </div>
   <div>
     <div class="center">
       <div class="container">
         <pre class="large-pre"><b>Emotes: </b></pre>
-        <p style="font-size: 150%" id="chat"></p>
+        <p id="chat"></p>
       </div>
-      <video id="record_video" width="45%" autoplay controls muted/>
-      <video id="video" width="45%" autoplay muted/>
+      <video id="record_video" width="50%" autoplay controls muted/>
+      <video id="video" width="50%" autoplay muted/>
     </div>
   </div>
   <script>
@@ -69,7 +71,7 @@ const live = `
       gunViewer.onStreamerData(data);
     });
 
-    gunDB.get(STREAM_ID + '-chat').map().on(function (data) {
+    gunDB.get(STREAM_ID + '-chat').get('chat').map().on(function (data) {
       if (arr.length >= 7) {
         arr.shift();
       }
@@ -99,11 +101,11 @@ const live = `
       var recordButton = document.getElementById("record_button");
       switch (state) {
         case recordState.RECORDING:
-          recordButton.innerText = "Stop recording";
-          gunDB.get(STREAM_ID + '-chat').get(user.is.pub).put(' Welcome! Were Live: ')
+          recordButton.innerText = "Stop Stream";
+          gunDB.get(STREAM_ID + '-chat').get('chat').get(user.is.pub).put(' Welcome! Were Live: ')
           break;
         default:
-          recordButton.innerText = "Start recording";
+          recordButton.innerText = "Start Stream";
           break;
       }
     }
@@ -143,7 +145,7 @@ const live = `
       </script>
     </div>
       <div class="center">
-        <button onclick="window.document.getElementById('shareDialog').close()">Close</button>
+        <button onclick="document.getElementById('shareDialog').close()">Close</button>
       </div>
     </div>
   </dialog>
@@ -153,23 +155,23 @@ const live = `
 const watch = `
 <main>
   <aside class="rAside">
-    <ul>
-      <li><button onclick="emotes('👋')">👋 Hi!</button></li>
+    <ul class="center">
+      <li><button onclick="emotes('👋')">👋 Hi</button></li>
       <li><button onclick="emotes('🤣')">🤣 LUL</button></li>
-      <li><button onclick="emotes('😞')">😞 NOOOOO</button></li>
-      <li><button onclick="emotes('😨')">😨 what...</button></li>
+      <li><button onclick="emotes('😞')">😞 L</button></li>
+      <li><button onclick="emotes('😨')">😨 what</button></li>
+      <li><button onclick="emotes('👍')">👍 good</button></li>
       <li><button onclick="emotes('😴')">😴 Zzz</button></li>
-      <li><button onclick="emotes('🤟')">🤟 Luv Ya</button></li>
-      <li><button onclick="emotes('😎')">😎 Cool</button></li>
-      <li><button onclick="emotes('🔥')">🔥 FIRE!</button></li>
+      <li><button onclick="emotes('🤟')">🤟 Luv U</button></li>
+      <li><button onclick="emotes('🔥')">🔥 FIRE</button></li>
     </ul>
   </aside>
   <div class="center">
     <div class="container">
-      <pre class="large-pre"><b>Emotes: </b><pre>
-      <pre style="font-size: 150%" id="chat"></pre>
+      <pre class="large-pre"><b>Emotes: </b></pre>
+      <p id="chat"></p>
     </div>
-    <video id="video" width="45%" autoplay/>
+    <video id="video" width="50%" autoplay/>
     <script>
       const streamer = urlParams.get('search');
       let arr = []
@@ -200,13 +202,13 @@ const watch = `
 
       function emotes(emoji) {
         if (user.is) {
-          gunDB.get(streamer + '-chat').get(user.is.pub).put(emoji)
+          gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put(emoji)
         } else {
           insertParam('content', 'auth');
         }
       }
 
-      gunDB.get(streamer + '-chat').map().on(function (data) {
+      gunDB.get(streamer + '-chat').get('chat').map().on(function (data) {
         if (arr.length >= 7) {
           arr.shift();
         }
@@ -217,7 +219,7 @@ const watch = `
   </div>
   <hr>
   <div class="center">
-    <button onclick="window.document.getElementById('shareDialog').showModal()">Share Creator</button>
+    <button onclick="document.getElementById('shareDialog').showModal()">Share Creator</button>
   </div>
   <dialog id="shareDialog">
     <div id="modal" class="center">
@@ -238,7 +240,7 @@ const watch = `
       </script>
     </div>
       <div class="center">
-        <button onclick="window.document.getElementById('shareDialog').close()">Close</button>
+        <button onclick="document.getElementById('shareDialog').close()">Close</button>
       </div>
     </div>
   </dialog>
@@ -260,14 +262,17 @@ const auth = `
     </form>
     <script>
       function signin() {
-        user.leave();
-        user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
-          if (ack.err) {
-            alert(ack.err);
-          }
+        if (user.is) {
+          user.leave
+        } else {
+          user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
+            if (ack.err) {
+              alert(ack.err);
+            }
           
-          location.reload();
-        });
+            location.reload();
+          });
+        }
       }
 
       function signup() {

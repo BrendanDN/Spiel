@@ -5,8 +5,8 @@
 }
 
 body {
-  min-height: 400px;
-  margin-bottom: 15rem;
+  height: 100%;
+  margin-bottom: 20rem;
   clear: both;
 	background-color: var(--main-bg-color);
   font-family: 'Trebuchet MS', sans-serif;
@@ -19,7 +19,7 @@ main {
 }
 
 header {
-  padding: 4.8rem;
+  padding: clamp(1rem, 1.5vw, 2rem);
   text-align: center;
   background-color: var(--second-bg-color);
   color: var(--txt-color);
@@ -29,12 +29,13 @@ button {
   background-color: var(--second-bg-color);
   border-color: var(--txt-color);
   color: var(--txt-color);
-  padding: 1.4rem 4rem;
+  padding: clamp(0.5rem, 1vw, 1.5rem);
+  width: clamp(8.2rem, 15vw, 20rem);
   margin: auto;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 1.6rem;
+  font-size: clamp(1rem, 1.5vw, 2rem);
   border-radius: 0.8rem;
   transition-duration: 0.4s;
   max-width: 23rem;
@@ -60,11 +61,13 @@ hr {
   background-color: var(--second-bg-color);
   border-color: var(--txt-color);
   color: var(--txt-color);
-  padding: 1.4rem 4.0rem;
+  padding: clamp(0.5rem, 1.5vw, 2.5rem);
+  margin: auto;
+  width: clamp(2rem, 15vw, 20rem);
   text-align: center;
   text-decoration: none;
   display: block;
-  font-size: 1.6rem;
+  font-size: clamp(1rem, 1.5vw, 2rem);
   border-radius: 0.8rem;
   transition-duration: 0.4s;
   max-width: 25rem;
@@ -79,8 +82,8 @@ hr {
 }
 
 label {
-  font-size: 2.4rem;
-  padding: 1.2rem 1.2rem 1.2rem 0;
+  font-size: clamp(1rem, 3vw, 4rem);
+  padding: clamp(0.5rem, 1vw, 2rem);
   display: inline-block;
   color: var(--txt-color);
 }
@@ -94,17 +97,17 @@ input[type=text], input[type=password] {
   border-radius: 0.4rem;
 }
 
-input[type=button], input[type=submit], input[type=reset] {
+input[type=button], input[type=submit] {
   text-align: center;
   display: inline-block;
-  font-size: 2.4rem;
+  font-size: clamp(1rem, 3vw, 4rem);
   background-color: var(--second-bg-color);
   border: solid;
   border-width: 0.1rem;
   color: var(--txt-color);
-  padding: 1.6rem 3.2rem;
+  padding: clamp(1rem, 2.5vw, 3rem);
   text-decoration: none;
-  margin: 0.4rem 0.2rem;
+  margin: auto;
   cursor: pointer;
   border-radius: 0.8rem;
   transition-duration: 0.4s;
@@ -118,6 +121,7 @@ input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
 }
 
 .lAside {
+  min-height: 100%;
   width: 30%;
   padding: 1.5rem;
   margin: 1.5rem;
@@ -126,6 +130,7 @@ input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
 }
 
 .rAside {
+  min-height: 100%;
   width: 30%;
   padding: 1.5rem;
   margin: 1.5rem;
@@ -150,7 +155,12 @@ select {
   align-items: center;
   text-align: center;
   flex-direction: column;
-  margin: 2.5rem;
+  margin: 1.5rem;
+}
+
+video {
+  max-width: 100%;
+  height: auto;
 }
 
 dialog {
@@ -173,7 +183,7 @@ ul {
 }
 
 ul li {
-  margin: 0.5rem;
+  margin: clamp(0rem, 0.2vw, 0.5rem);
   display: inline;
 }
 
@@ -187,7 +197,7 @@ a:hover {
 }
 
 .container {
-  width: 45%;
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -202,22 +212,24 @@ h1 {
   color: var(--txt-color);
   text-align: center;
   display: block;
-  font-size: 2em;
+  font-size: clamp(2rem, 3vw, 3.5rem);
   margin: 0.67em, 0;
   font-weight: bold;
 }
 
 .large-pre {
   display: block;
-  font-size: 1em;
-  margin: 1.33em, 0;
+  font-size: clamp(1rem, 2vw, 2.5rem);
+  padding: clamp(0.5rem, 0.7vw, 1rem);
+  margin: clamp(0.5rem, 0.7vw, 1rem);
   font-weight: bold;
 }
 
 p {
   color: var(--txt-color);
   display: block;
-  margin: 1em, 0;
+  font-size: clamp(1rem, 1.5vw, 2rem);
+  margin: clamp(0.5rem, 1vw, 1.7rem);
 }
 
 form {
@@ -236,7 +248,7 @@ footer {
   position: fixed;
   bottom: 0rem;
   width: 100%;
-  min-height: 150px;
+  max-height: 10rem;
   background-color: var(--second-bg-color);
   color: var(--txt-color);
   text-align: center;
