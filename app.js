@@ -284,8 +284,6 @@ const auth = `
             alert(ack.err);
           } else if (ack.pub) {
             confirm("User created, to continue sign in!");
-          } else {
-            alert("We ran into an unexpected error");
           }
         });
       }
