@@ -30,7 +30,7 @@ button {
   border-color: var(--txt-color);
   color: var(--txt-color);
   padding: clamp(0.5rem, 1vw, 1.5rem);
-  max-width: clamp(8.2rem, 15vw, 20rem);
+  width: clamp(8.2rem, 15vw, 20rem);
   margin: auto;
   text-align: center;
   text-decoration: none;
@@ -156,7 +156,7 @@ input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
 }
 
 video {
-  width: 65%;
+  width: 50%;
 }
 
 @media only screen and (max-width: 768px) {    
@@ -198,12 +198,13 @@ a:hover {
 }
 
 .container {
-  width: 65%;
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   flex-direction: column;
+  flex-wrap: wrap;
   background-color: var(--second-bg-color);
   color: var(--txt-color);
 }
