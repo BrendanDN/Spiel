@@ -41,7 +41,7 @@
     </header>
     <script>
       //Configure GUN to pass to streamer
-      const gun = Gun({localStorage: true, radisk: true });
+      const gun = Gun();
       let user = gun.user().recall({sessionStorage: true});
 
       const urlParams = new URLSearchParams(window.location.search);
