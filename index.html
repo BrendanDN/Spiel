@@ -42,7 +42,7 @@
     <script>
       //Configure GUN to pass to streamer
       const gun = Gun();
-      let user = gun.user();
+      let user = gun.user().recall({sessionStorage: true});
 
       const urlParams = new URLSearchParams(window.location.search);
       const content = urlParams.get('content');
