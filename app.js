@@ -156,14 +156,14 @@ const watch = `
 <main>
   <aside class="rAside">
     <ul class="container">
-      <li><button onclick="emotes('👋')">👋 Hi</button></li>
-      <li><button onclick="emotes('🤣')">🤣 LUL</button></li>
-      <li><button onclick="emotes('😞')">😞 L</button></li>
-      <li><button onclick="emotes('😨')">😨 what</button></li>
-      <li><button onclick="emotes('👍')">👍 good</button></li>
-      <li><button onclick="emotes('😴')">😴 Zzz</button></li>
-      <li><button onclick="emotes('🤟')">🤟 Luv U</button></li>
-      <li><button onclick="emotes('🔥')">🔥 FIRE</button></li>
+      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put('👋')">👋 Hi</button></li>
+      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put('🤣')">🤣 LUL</button></li>
+      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put('😞')">😞 L</button></li>
+      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put('😨')">😨 what</button></li>
+      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put('👍')">👍 good</button></li>
+      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put('😴')">😴 Zzz</button></li>
+      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put('🤟')">🤟 Luv U</button></li>
+      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put('🔥')">🔥 FIRE</button></li>
     </ul>
   </aside>
   <div class="center">
@@ -199,14 +199,6 @@ const watch = `
         //Make sure the video is in the html or create on here dynamically.
         gunViewer.onStreamerData(data);
       });
-
-      function emotes(emoji) {
-        if (user.is) {
-          gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put(emoji)
-        } else {
-          insertParam('content', 'auth');
-        }
-      }
 
       gunDB.get(streamer + '-chat').get('chat').map().on(function (data) {
         if (arr.length >= 7) {
@@ -263,14 +255,12 @@ const auth = `
     <script>
       function signin() {
         if (user.is) {
-          user.leave
+          user.leave();
         } else {
           user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
             if (ack.err) {
               alert(ack.err);
             }
-          
-            location.reload();
           });
         }
       }
@@ -279,7 +269,7 @@ const auth = `
         user.create(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
           if (ack.err) {
             alert(ack.err);
-          } else {
+          } else if (ack.pub) {
             confirm("User created, to continue sign in!");
           }
         });
