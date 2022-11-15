@@ -254,15 +254,11 @@ const auth = `
     </form>
     <script>
       function signin() {
-        if (user.is) {
-          user.leave();
-        } else {
-          user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
-            if (ack.err) {
-              alert(ack.err);
-            }
-          });
-        }
+        user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
+          if (ack.err) {
+            alert(ack.err);
+          }
+        });
       }
 
       function signup() {
