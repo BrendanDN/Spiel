@@ -271,31 +271,23 @@ const auth = `
     </form>
     <script>
       function signin() {
-        try {
-          user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
-            if (ack.err) {
-              alert(ack.err);
-            }
-          });
-        } catch (err) {
-          alert(err);
-        }
+        user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
+          if (ack.err) {
+            alert(ack.err);
+          }
+        });
       }
 
       function signup() {
-        try {
-          user.create(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
-            if (ack.err) {
-              alert(ack.err);
-            } else if (ack.pub) {
-              confirm("User created, to continue sign in!");
-            } else {
-              alert("We ran into an unexpected error");
-            }
-          });
-        } catch(err) {
-          alert(err);
-        }
+        user.create(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
+          if (ack.err) {
+            alert(ack.err);
+          } else if (ack.pub) {
+            confirm("User created, to continue sign in!");
+          } else {
+            alert("We ran into an unexpected error");
+          }
+        });
       }
     </script>
   </div>
