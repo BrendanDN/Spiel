@@ -87,9 +87,9 @@ label {
 }
 
 input[type=text], input[type=password] {
-  width: 100%;
+  min-width: 95%;
   padding: 1.2rem 2.0rem;
-  margin: 0.8rem 0;
+  margin: 0.8rem;
   box-sizing: border-box;
   border: 0.2rem solid var(--txt-color);
   border-radius: 0.4rem;
@@ -152,7 +152,7 @@ input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
   text-align: center;
   flex-direction: column;
   margin: 1.5rem;
-  overflow: scroll;
+  overflow: auto;
 }
 
 video {
@@ -214,6 +214,18 @@ a:hover {
     width: 100%;
     flex-direction: row;
   }
+}
+
+.list-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: var(--second-bg-color);
+  color: var(--txt-color);
 }
 
 h1 {

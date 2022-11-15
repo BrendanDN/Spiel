@@ -7,6 +7,12 @@ const err404 = `
 
 const live = `
 <main>
+  <div class="center">
+    <div class="container">
+      <label name="streamTitle">Stream Title:</label>
+      <input type="text" id="streamTitle" name="streamTitle">
+    </div>
+  </div>
   <div>
     <aside class="lAside">
       <div class="center">
@@ -101,10 +107,13 @@ const live = `
       var recordButton = document.getElementById("record_button");
       switch (state) {
         case recordState.RECORDING:
+          document.getElementById("streamTitle").disabled = true;
+          gunDB.get('stream-meta').get('meta').get(STREAM_ID).put(document.getElementById("streamTitle").value);
           recordButton.innerText = "Stop Stream";
-          gunDB.get(STREAM_ID + '-chat').get('chat').get(user.is.pub).put(' Welcome! Were Live: ')
+          gunDB.get(STREAM_ID + '-chat').get('chat').get(user.is.pub).put(' Welcome! Were Live: ');
           break;
         default:
+          document.getElementById("streamTitle").disabled = false;
           recordButton.innerText = "Start Stream";
           break;
       }
@@ -156,14 +165,14 @@ const watch = `
 <main>
   <aside class="rAside">
     <ul class="container">
-      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put('👋')">👋 Hi</button></li>
-      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put('🤣')">🤣 LUL</button></li>
-      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put('😞')">😞 L</button></li>
-      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put('😨')">😨 what</button></li>
-      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put('👍')">👍 good</button></li>
-      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put('😴')">😴 Zzz</button></li>
-      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put('🤟')">🤟 Luv U</button></li>
-      <li><button onclick="gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put('🔥')">🔥 FIRE</button></li>
+      <li><button onclick="emotes('👋')">👋 Hi</button></li>
+      <li><button onclick="emotes('🤣')">🤣 LUL</button></li>
+      <li><button onclick="emotes('😞')">😞 L</button></li>
+      <li><button onclick="emotes('😨')">😨 what</button></li>
+      <li><button onclick="emotes('👍')">👍 good</button></li>
+      <li><button onclick="emotes('😴')">😴 Zzz</button></li>
+      <li><button onclick="emotes('🤟')">🤟 Luv U</button></li>
+      <li><button onclick="emotes('🔥')">🔥 FIRE</button></li>
     </ul>
   </aside>
   <div class="center">
@@ -199,6 +208,14 @@ const watch = `
         //Make sure the video is in the html or create on here dynamically.
         gunViewer.onStreamerData(data);
       });
+
+      function emotes(emoji){
+        if (user.is){
+          gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put(emoji);
+        } else {
+          insertParam('content', 'auth');
+        }
+      }
 
       gunDB.get(streamer + '-chat').get('chat').map().on(function (data) {
         if (arr.length >= 7) {
@@ -267,6 +284,8 @@ const auth = `
             alert(ack.err);
           } else if (ack.pub) {
             confirm("User created, to continue sign in!");
+          } else {
+            alert("We ran into an unexpected error");
           }
         });
       }
@@ -281,19 +300,23 @@ const home = `
     <h1>Welcome! :)</h1>
     <p>The Just Chatting Twitch alternative live streaming service</p>
   </div>
-  <!--
   <hr>
-  <ul id="streams"></ul>
+  <div class="center">
+    <ul class="list-container" id="streams"></ul>
+    <p class="container">Appears you have reached the end of the streamer list, wel done :)</p>
+  </div>
   <script>
+    const winLoc = window.location.origin + "/?content=watch&search=";
+    
     //Configure GUN to pass to streamer
     var peers = ['https://spiel-server-eu.herokuapp.com/gun', 'https://spiel-server-us.herokuapp.com/gun'];
     var opt = { peers: peers, localStorage: false, radisk: false };
     var gunDB = Gun(opt);
 
-    gunDB.get('streams').map().on(function (data, id) {
-      document.getElementById('streams').innerHTML += '<li>' + id + '</li>'
+    gunDB.get('stream-meta').get('meta').map().once(function (data, id) {
+      document.getElementById('streams').innerHTML += '<li><pre class="large-pre">' + data + '</pre><a href="' + winLoc + id + '"><button>Watch Now</button></a></li>';
+      document.getElementById('streams').innerHTML += '<hr>';
     });
   </script>
-  -->
 </main>
 `;
