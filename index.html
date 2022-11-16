@@ -42,7 +42,7 @@
     <script>
       const peers = ['https://spiel-server-eu.herokuapp.com/gun', 'https://spiel-server-us.herokuapp.com/gun'];
       const opt = { peers: peers, localStorage: true, radisk: false };
-      const gunDB = Gun(opt);
+      const gun = Gun(opt);
       let user = gun.user().recall({sessionStorage: true});
 
       const urlParams = new URLSearchParams(window.location.search);
