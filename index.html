@@ -40,8 +40,8 @@
       </div>
     </header>
     <script>
-      const peers = ['https://spiel-server-eu.herokuapp.com/gun', 'https://spiel-server-us.herokuapp.com/gun'];
-      const opt = { peers: peers, localStorage: true, radisk: false };
+      const usrPeers = ['https://spiel-server-eu.herokuapp.com/gun', 'https://spiel-server-us.herokuapp.com/gun'];
+      const opt = { peers: usrPeers, localStorage: true, radisk: false };
       const gun = Gun(opt);
       let user = gun.user().recall({sessionStorage: true});
 
