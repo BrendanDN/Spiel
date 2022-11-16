@@ -30,8 +30,8 @@
             <ul>
               <li><button onclick="insertParam('content', 'home')">Home</button></li>
               <li><button onclick="insertParam('content', 'live')">Live</button></li>
-              <li><button onclick="window.location.href = 'https://github.com/BrendanDN/Spiel/blob/main/README.md/#guides'">Guides</button></li>
-              <li><button onclick="window.location.href = 'https://github.com/BrendanDN/Spiel/blob/main/README.md/#support'">Support</button></li>
+              <li><button onclick="insertParam('content', 'home')">Guides</button></li>
+              <li><button onclick="insertParam('content', 'home')">Support</button></li>
             </ul>
           </div>
           <hr>
@@ -40,9 +40,8 @@
       </div>
     </header>
     <script>
-      const usrPeers = ['https://spiel-server-eu.herokuapp.com/gun', 'https://spiel-server-us.herokuapp.com/gun'];
-      const opt = { peers: usrPeers, localStorage: true, radisk: false };
-      const gun = Gun(opt);
+      //Configure GUN to pass to streamer
+      const gun = Gun();
       let user = gun.user().recall({sessionStorage: true});
 
       const urlParams = new URLSearchParams(window.location.search);
