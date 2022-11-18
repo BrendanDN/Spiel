@@ -143,7 +143,6 @@ const live = `
           <li><a id="whatsapp" href="" target="_blank">WhatsApp</a></li>
           <li><a id="weibo" href="">Weibo</a></li>
           <li><a id="twitter" href="">Twitter</a></li>
-          <li><a id="mastodon" href="">Mastodon</a></li>
           <li><a id="reddit" href="">Reddit</a></li>
         </ul>
       <script>
@@ -151,7 +150,6 @@ const live = `
         document.getElementById("whatsapp").href = "https://api.whatsapp.com/send?text=Im Live: " + winLoc;
         document.getElementById("weibo").href = "http://service.weibo.com/share/share.php?url=&appkey=&title=Im Live: " + winLoc + "&pic=&ralateUid=&language=zh_cn";
         document.getElementById("twitter").href = "https://twitter.com/intent/tweet?url=Im Live: " + winLoc;
-        document.getElementById("mastodon").href = "web+mastodon://share?text=Im Live: " + winLoc;
         document.getElementById("reddit").href = "https://www.reddit.com/submit?url=Im Live: " + winLoc;
       </script>
     </div>
@@ -240,7 +238,6 @@ const watch = `
           <li><a id="whatsapp" href="" target="_blank">WhatsApp</a></li>
           <li><a id="weibo" href="">Weibo</a></li>
           <li><a id="twitter" href="">Twitter</a></li>
-          <li><a id="mastodon" href="">Mastodon</a></li>
           <li><a id="reddit" href="">Reddit</a></li>
         </ul>
       <script>
@@ -248,7 +245,6 @@ const watch = `
         document.getElementById("whatsapp").href = "https://api.whatsapp.com/send?text=" + encodeURIComponent(window.location);
         document.getElementById("weibo").href = "http://service.weibo.com/share/share.php?url=" + encodeURIComponent(window.location) + "&appkey=&title=&pic=&ralateUid=&language=zh_cn";
         document.getElementById("twitter").href = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(window.location);
-        document.getElementById("mastodon").href = "web+mastodon://share?text=" + encodeURIComponent(window.location);
         document.getElementById("reddit").href = "https://www.reddit.com/submit?url=" + encodeURIComponent(window.location);
       </script>
     </div>
