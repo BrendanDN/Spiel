@@ -9,7 +9,7 @@ const live = `
 <main>
   <div class="center">
     <div class="container">
-      <label name="streamTitle">Stream Title:</label>
+      <label for="streamTitle">Stream Title:</label>
       <input type="text" id="streamTitle" name="streamTitle">
     </div>
   </div>
@@ -143,14 +143,16 @@ const live = `
           <li><a id="whatsapp" href="" target="_blank">WhatsApp</a></li>
           <li><a id="weibo" href="">Weibo</a></li>
           <li><a id="twitter" href="">Twitter</a></li>
+          <li><a id="mastodon" href="">Mastodon</a></li>
           <li><a id="reddit" href="">Reddit</a></li>
         </ul>
       <script>
-        window.document.getElementById("facebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + winLoc;
-        window.document.getElementById("whatsapp").href = "https://api.whatsapp.com/send?text=Im Live: " + winLoc;
-        window.document.getElementById("weibo").href = "http://service.weibo.com/share/share.php?url=&appkey=&title=Im Live: " + winLoc + "&pic=&ralateUid=&language=zh_cn";
-        window.document.getElementById("twitter").href = "https://twitter.com/intent/tweet?url=Im Live: " + winLoc;
-        window.document.getElementById("reddit").href = "https://www.reddit.com/submit?url=Im Live: " + winLoc;
+        document.getElementById("facebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + winLoc;
+        document.getElementById("whatsapp").href = "https://api.whatsapp.com/send?text=Im Live: " + winLoc;
+        document.getElementById("weibo").href = "http://service.weibo.com/share/share.php?url=&appkey=&title=Im Live: " + winLoc + "&pic=&ralateUid=&language=zh_cn";
+        document.getElementById("twitter").href = "https://twitter.com/intent/tweet?url=Im Live: " + winLoc;
+        document.getElementById("mastodon").href = "web+mastodon://share?text=Im Live: " + winLoc;
+        document.getElementById("reddit").href = "https://www.reddit.com/submit?url=Im Live: " + winLoc;
       </script>
     </div>
       <div class="center">
@@ -238,6 +240,7 @@ const watch = `
           <li><a id="whatsapp" href="" target="_blank">WhatsApp</a></li>
           <li><a id="weibo" href="">Weibo</a></li>
           <li><a id="twitter" href="">Twitter</a></li>
+          <li><a id="mastodon" href="">Mastodon</a></li>
           <li><a id="reddit" href="">Reddit</a></li>
         </ul>
       <script>
@@ -245,6 +248,7 @@ const watch = `
         document.getElementById("whatsapp").href = "https://api.whatsapp.com/send?text=" + encodeURIComponent(window.location);
         document.getElementById("weibo").href = "http://service.weibo.com/share/share.php?url=" + encodeURIComponent(window.location) + "&appkey=&title=&pic=&ralateUid=&language=zh_cn";
         document.getElementById("twitter").href = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(window.location);
+        document.getElementById("mastodon").href = "web+mastodon://share?text=" + encodeURIComponent(window.location);
         document.getElementById("reddit").href = "https://www.reddit.com/submit?url=" + encodeURIComponent(window.location);
       </script>
     </div>
@@ -308,9 +312,8 @@ const home = `
     var opt = { peers: peers, localStorage: false, radisk: false };
     var gunDB = Gun(opt);
 
-    gunDB.get('stream-meta').get('meta').map().once(function (data, id) {
+    gunDB.get('stream-meta').get('meta').map().once(async function (data, id) {
       document.getElementById('streams').innerHTML += '<li><pre class="large-pre">' + data + '</pre><a href="' + winLoc + id + '"><button aria-label="Watch ' + data + '">Watch Now</button></a></li>';
-      document.getElementById('streams').innerHTML += '<hr>';
     });
   </script>
 </main>
