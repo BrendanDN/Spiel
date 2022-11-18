@@ -31,8 +31,8 @@ const live = `
         <pre class="large-pre"><b>Emotes: </b></pre>
         <p id="chat"></p>
       </div>
-      <video id="record_video" autoplay controls muted/>
-      <video id="video" autoplay muted/>
+      <video aria-label='streamer preview' id="record_video" autoplay controls muted/>
+      <video aria-label='viewer preview' id="video" autoplay muted/>
     </div>
   </div>
   <script>
@@ -163,7 +163,7 @@ const live = `
 
 const watch = `
 <main>
-  <aside class="rAside">
+  <aside aria-label='emote buttons' class="rAside">
     <ul class="container">
       <li><button onclick="emotes('👋')">👋 Hi</button></li>
       <li><button onclick="emotes('🤣')">🤣 LUL</button></li>
@@ -259,9 +259,7 @@ const watch = `
 const auth = `
 <main>
   <div>
-    <h1>Your Spiel Account</h1>
-    <form class="center">
-      <span id="error" style="color:red;"></span>
+    <form aria-label='authorization form' class="center">
       <label for="alias">Username:</label><br>
       <input type="text" id="alias" name="username"></input><br><br>
       <label for="pass">Password:</label><br>
@@ -295,8 +293,7 @@ const auth = `
 const home = `
 <main>
   <div class="center">
-    <h1>Welcome! :)</h1>
-    <p>The Just Chatting Twitch alternative live streaming service</p>
+    <h1>The Just Chatting Twitch alternative live streaming service</h1>
   </div>
   <hr>
   <div class="center">
@@ -312,7 +309,7 @@ const home = `
     var gunDB = Gun(opt);
 
     gunDB.get('stream-meta').get('meta').map().once(function (data, id) {
-      document.getElementById('streams').innerHTML += '<li><pre class="large-pre">' + data + '</pre><a href="' + winLoc + id + '"><button>Watch Now</button></a></li>';
+      document.getElementById('streams').innerHTML += '<li><pre class="large-pre">' + data + '</pre><a href="' + winLoc + id + '"><button aria-label="Watch ' + data + '">Watch Now</button></a></li>';
       document.getElementById('streams').innerHTML += '<hr>';
     });
   </script>
