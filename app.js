@@ -17,11 +17,12 @@ const live = `
     <aside class="lAside">
       <div class="center">
         <button class="liveButton" type="button" onclick="gunRecorder.startCamera()">Start Camera</button>
+        <!-- <button type="button" onclick="gunRecorder.startScreenCapture()">Start Screen Capture</button> -->
         <button class="liveButton" id="record_button" type="button" onclick="gunRecorder.record()">Start Stream</button>
       </div>
       <hr>
       <div class="center">
-        <button onclick="document.getElementById('shareDialog').showModal()">Share Stream</button>
+        <button id="shareButton" onclick="document.getElementById('shareDialog').showModal()">Share Stream</button>
       </div>
     </aside>
   </div>
@@ -108,12 +109,14 @@ const live = `
       switch (state) {
         case recordState.RECORDING:
           document.getElementById("streamTitle").disabled = true;
+          document.getElementById("shareButton").disabled = true;
           gunDB.get('stream-meta').get('meta').get(STREAM_ID).put(document.getElementById("streamTitle").value);
           recordButton.innerText = "Stop Stream";
           gunDB.get(STREAM_ID + '-chat').get('chat').get(user.is.pub).put(' Welcome! Were Live: ');
           break;
         default:
           document.getElementById("streamTitle").disabled = false;
+          document.getElementById("shareButton").disabled = false;
           recordButton.innerText = "Start Stream";
           break;
       }
@@ -213,7 +216,7 @@ const watch = `
         if (user.is){
           gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put(emoji);
         } else {
-          insertParam('content', 'auth');
+          window.location.search = 'content=auth';
         }
       }
 
@@ -261,9 +264,9 @@ const auth = `
   <div>
     <form aria-label='authorization form' class="center">
       <label for="alias">Username:</label><br>
-      <input type="text" id="alias" name="username"></input><br><br>
+      <input type="text" id="alias"></input><br><br>
       <label for="pass">Password:</label><br>
-      <input type="password" id="pass" name="password"></input><br><br>
+      <input type="password" id="pass"></input><br><br>
       <input type="submit" value="Sign In" onclick="signin()"><br><br>
       <input type="submit" value="Sign Up" onclick="signup()"><br><br>  
     </form>

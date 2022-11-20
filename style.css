@@ -47,6 +47,13 @@ button:hover {
   color: var(--second-bg-color);
 }
 
+button:disabled,
+button[disabled]{
+  border: 1px solid #303131;
+  background-color: #1a1919;
+  color: #1b5045;
+}
+
 hr {
   border: 0.1rem solid var(--txt-color);
 }

@@ -26,8 +26,8 @@
         <nav>
           <div>
             <ul>
-              <li><button onclick="insertParam('content', 'home')">Home</button></li>
-              <li><button onclick="insertParam('content', 'live')">Live</button></li>
+              <li><button onclick="window.location.search = 'content=home'">Home</button></li>
+              <li><button onclick="window.location.search = 'content=live'">Live</button></li>
               <li><button onclick="window.location.href = 'https://github.com/BrendanDN/Spiel#guides'">Guides</button></li>
               <li><button onclick="window.location.href = 'https://github.com/BrendanDN/Spiel#support'">Support</button></li>
             </ul>
@@ -45,37 +45,9 @@
       const urlParams = new URLSearchParams(window.location.search);
       const content = urlParams.get('content');
 
-      function insertParam(key, value) {
-        key = encodeURIComponent(key);
-        value = encodeURIComponent(value);
-
-        // kvp looks like ['key1=value1', 'key2=value2', ...]
-        var kvp = document.location.search.substr(1).split('&');
-        let i=0;
-
-        for(; i<kvp.length; i++){
-          if (kvp[i].startsWith(key + '=')) {
-            let pair = kvp[i].split('=');
-            pair[1] = value;
-            kvp[i] = pair.join('=');
-            break;
-          }
-        }
-
-        if(i >= kvp.length){
-          kvp[kvp.length] = [key,value].join('=');
-        }
-
-        // can return this or...
-        let params = kvp.join('&');
-
-        // reload page with new params
-        document.location.search = params;
-      }
-
       if (!urlParams.has('content')) {
-        insertParam('content', 'home');
-      } 
+        window.location.search = 'content=home';
+      }
       
       function signout() {
         try {
@@ -112,8 +84,8 @@
       } else {
         document.getElementById("auth").innerHTML = `
           <ul>
-            <li><button onclick="insertParam('content', 'auth')">Sign In</button></li>
-            <li><button onclick="insertParam('content', 'auth')">Sign Up</button></li>
+            <li><button onclick="window.location.search = 'content=auth&auth=login'">Sign In</button></li>
+            <li><button onclick="window.location.search = 'content=auth&auth=signin'">Sign Up</button></li>
           </ul>
         `;
 
