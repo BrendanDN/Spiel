@@ -69,7 +69,10 @@
         case 'watch':
           document.write(watch);
           break;
-        case 'auth':
+        case 'signin':
+          document.write(home);
+          break;
+        case 'signup':
           document.write(home);
           break;
         case 'live':
@@ -84,8 +87,8 @@
       } else {
         document.getElementById("auth").innerHTML = `
           <ul>
-            <li><button onclick="window.location.search = 'content=auth&auth=login'">Sign In</button></li>
-            <li><button onclick="window.location.search = 'content=auth&auth=signin'">Sign Up</button></li>
+            <li><button onclick="window.location.search = 'content=signin'">Sign In</button></li>
+            <li><button onclick="window.location.search = 'content=signup'">Sign Up</button></li>
           </ul>
         `;
 
@@ -93,11 +96,14 @@
         case 'watch':
           document.write(watch);
           break;
-        case 'auth':
-          document.write(auth);
+        case 'signin':
+          document.write(signin);
+          break;
+        case 'signup':
+          document.write(signup);
           break;
         case 'live':
-          document.write(auth);
+          document.write(signin);
           break;
         case 'home':
           document.write(home);

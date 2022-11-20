@@ -216,7 +216,7 @@ const watch = `
         if (user.is){
           gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put(emoji);
         } else {
-          window.location.search = 'content=auth';
+          window.location.search = 'content=signin';
         }
       }
 
@@ -259,27 +259,47 @@ const watch = `
 </main>
 `;
 
-const auth = `
+const signin = `
 <main>
   <div>
-    <form aria-label='authorization form' class="center">
+    <h1>Sign In</h1>
+  </div>
+  <div>
+    <form onsubmit="signIn()" class="center">
       <label for="alias">Username:</label><br>
       <input type="text" id="alias"></input><br><br>
       <label for="pass">Password:</label><br>
       <input type="password" id="pass"></input><br><br>
-      <input type="submit" value="Sign In" onclick="signin()"><br><br>
-      <input type="submit" value="Sign Up" onclick="signup()"><br><br>  
+      <input type="submit" value="Sign In"><br>
     </form>
     <script>
-      function signin() {
+      function signIn() {
         user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
           if (ack.err) {
             alert(ack.err);
           }
         });
       }
+    </script>
+  </div>
+</main>
+`;
 
-      function signup() {
+const signup = `
+<main>
+  <div>
+    <h1>Sign Up</h1>
+  </div>
+  <div>
+    <form onsubmit="signUp()" class="center">
+      <label for="alias">Username:</label><br>
+      <input type="text" id="alias"></input><br><br>
+      <label for="pass">Password:</label><br>
+      <input type="password" id="pass"></input><br><br>
+      <input type="submit" value="Sign Up"><br>
+    </form>
+    <script>
+      function signUp() {
         user.create(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
           if (ack.err) {
             alert(ack.err);
