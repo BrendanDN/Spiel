@@ -1,7 +1,9 @@
 const err404 = `
 <main>
-  <pre><b>404 error</b></pre>
-  <pre>Sorry, we could not find the content you were looking for!</pre>
+  <div class="center">
+    <h1><b>404 error</b></h1>
+    <p>Sorry, we could not find the content you were looking for!</p>
+  </div>
 </main>
 `;
 
