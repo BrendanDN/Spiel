@@ -270,18 +270,20 @@ const signin = `
     </div>
   </div>
   <div>
-    <form onsubmit="signIn()" class="center">
+    <form class="center">
       <label for="alias">Username:</label><br>
       <input type="text" id="alias"></input><br><br>
       <label for="pass">Password:</label><br>
       <input type="password" id="pass"></input><br><br>
-      <input type="submit" value="Sign In"><br>
+      <input type="button" value="Sign In" onclick="signIn()">
     </form>
      <script>
       window.signIn = function() {
         user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
           if (ack.err) {
             alert(ack.err);
+          } else {
+            location.reload();
           }
         });
       }
@@ -299,12 +301,12 @@ const signup = `
     </div>
   </div>
   <div>
-    <form onsubmit="signUp()" class="center">
+    <form class="center">
       <label for="alias">Username:</label><br>
       <input type="text" id="alias"></input><br><br>
       <label for="pass">Password:</label><br>
       <input type="password" id="pass"></input><br><br>
-      <input type="submit" value="Sign Up"><br>
+      <input type="button" value="Sign Up" onclick="signUp()">
     </form>
     <script>
       window.signUp = function() {
@@ -313,6 +315,8 @@ const signup = `
             alert(ack.err);
           } else if (ack.pub) {
             confirm("User created, to continue sign in!");
+          } else {
+            location.reload();
           }
         });
       }
