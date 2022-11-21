@@ -263,17 +263,13 @@ const watch = `
 
 const signin = `
 <main>
-  <div>
-    <h1>Sign In</h1>
+  <div class="center">
+     <div class="container">
+      <h1>Sign In</h1>
+      <a href="?content=signup">Create an account?</a>
+    </div>
   </div>
   <div>
-    <form onsubmit="signIn()" class="center">
-      <label for="alias">Username:</label><br>
-      <input type="text" id="alias"></input><br><br>
-      <label for="pass">Password:</label><br>
-      <input type="password" id="pass"></input><br><br>
-      <input type="submit" value="Sign In"><br>
-    </form>
     <script>
       function signIn() {
         user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
@@ -283,23 +279,26 @@ const signin = `
         });
       }
     </script>
+    <form onsubmit="signIn()" class="center">
+      <label for="alias">Username:</label><br>
+      <input type="text" id="alias"></input><br><br>
+      <label for="pass">Password:</label><br>
+      <input type="password" id="pass"></input><br><br>
+      <input type="submit" value="Sign In"><br>
+    </form>
   </div>
 </main>
 `;
 
 const signup = `
 <main>
-  <div>
-    <h1>Sign Up</h1>
+  <div class="center">
+     <div class="container">
+      <h1>Sign Up</h1>
+      <a href="?content=signin">Already have an account?</a>
+    </div>
   </div>
   <div>
-    <form onsubmit="signUp()" class="center">
-      <label for="alias">Username:</label><br>
-      <input type="text" id="alias"></input><br><br>
-      <label for="pass">Password:</label><br>
-      <input type="password" id="pass"></input><br><br>
-      <input type="submit" value="Sign Up"><br>
-    </form>
     <script>
       function signUp() {
         user.create(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
@@ -311,6 +310,13 @@ const signup = `
         });
       }
     </script>
+    <form onsubmit="signUp()" class="center">
+      <label for="alias">Username:</label><br>
+      <input type="text" id="alias"></input><br><br>
+      <label for="pass">Password:</label><br>
+      <input type="password" id="pass"></input><br><br>
+      <input type="submit" value="Sign Up"><br>
+    </form>
   </div>
 </main>
 `;
