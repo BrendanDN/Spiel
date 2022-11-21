@@ -309,13 +309,22 @@ const signup = `
       <input type="button" value="Sign Up" onclick="signUp()">
     </form>
     <script>
+      window.signIn = function() {
+        user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
+          if (ack.err) {
+            alert(ack.err);
+          } else {
+            location.reload();
+          }
+        });
+      }
+      
       window.signUp = function() {
         user.create(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
           if (ack.err) {
             alert(ack.err);
           } else if (ack.pub) {
-            confirm("User created, to continue sign in!");
-          } else {
+            signIn();
             location.reload();
           }
         });
