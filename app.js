@@ -309,7 +309,7 @@ const signup = `
       <input type="button" value="Sign Up" onclick="signUp()">
     </form>
     <script>
-      window.signIn = function() {
+       window.signIn = function() {
         user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
           if (ack.err) {
             alert(ack.err);
@@ -323,7 +323,7 @@ const signup = `
         user.create(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
           if (ack.err) {
             alert(ack.err);
-          } else if (ack.pub) {
+          } else {
             signIn();
             location.reload();
           }
