@@ -270,7 +270,7 @@ const signin = `
     </div>
   </div>
   <div>
-    <form onSubmit="signIn()" class="center">
+    <form onsubmit="signIn()" class="center">
       <label for="alias">Username:</label><br>
       <input type="text" id="alias"></input><br><br>
       <label for="pass">Password:</label><br>
@@ -299,7 +299,7 @@ const signup = `
     </div>
   </div>
   <div>
-    <form onSubmit="signUp()" class="center">
+    <form onsubmit="signUp()" class="center">
       <label for="alias">Username:</label><br>
       <input type="text" id="alias"></input><br><br>
       <label for="pass">Password:</label><br>
