@@ -270,15 +270,6 @@ const signin = `
     </div>
   </div>
   <div>
-    <script>
-      function signIn() {
-        user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
-          if (ack.err) {
-            alert(ack.err);
-          }
-        });
-      }
-    </script>
     <form onsubmit="signIn()" class="center">
       <label for="alias">Username:</label><br>
       <input type="text" id="alias"></input><br><br>
@@ -286,6 +277,15 @@ const signin = `
       <input type="password" id="pass"></input><br><br>
       <input type="submit" value="Sign In"><br>
     </form>
+     <script>
+      window.signIn = function() {
+        user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
+          if (ack.err) {
+            alert(ack.err);
+          }
+        });
+      }
+    </script>
   </div>
 </main>
 `;
@@ -299,8 +299,15 @@ const signup = `
     </div>
   </div>
   <div>
+    <form onsubmit="signUp()" class="center">
+      <label for="alias">Username:</label><br>
+      <input type="text" id="alias"></input><br><br>
+      <label for="pass">Password:</label><br>
+      <input type="password" id="pass"></input><br><br>
+      <input type="submit" value="Sign Up"><br>
+    </form>
     <script>
-      function signUp() {
+      window.signUp = function() {
         user.create(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
           if (ack.err) {
             alert(ack.err);
@@ -310,13 +317,6 @@ const signup = `
         });
       }
     </script>
-    <form onsubmit="signUp()" class="center">
-      <label for="alias">Username:</label><br>
-      <input type="text" id="alias"></input><br><br>
-      <label for="pass">Password:</label><br>
-      <input type="password" id="pass"></input><br><br>
-      <input type="submit" value="Sign Up"><br>
-    </form>
   </div>
 </main>
 `;
