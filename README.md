@@ -7,12 +7,15 @@ The Just Chatting Twitch and Youtube Live alternative live streaming service: [s
 ### Guides
 
 - [Preface](#preface)
+- [How to get viewers on your stream!](#how-to-get-viewers-on-your-stream!)
 - [Coming Soon...](#)
 
 ### Support
 
 - [Support Us](#support-us)
 - [Coming Soon...](#)
+
+***
 
 ### Preface
 
@@ -22,13 +25,35 @@ The start of liberation is a decentralized system for user creation and authenti
 
 Another objective of Spiel is independence from the algorithm; The algorithm, by the nature of what it is, is a computer program, that cannot judge the underlying message of a video, so video recommendations are rated by the data around the video which would be viewed and not the data in the video; A system like that can be abused by posting shocking and appalling content for the sole purpose of getting clicks which equate to views. This then could lead to creators spending little time in creating videos with substance and putting no thought into any ethical implications videos may have and all their time into building algorithm-friendly videos. This then could and sometimes has led to disturbing trends being spread through internet culture which spiral out of control leading to these in-human messages being imprinted into the minds of our society. Instead, on Spiel creator discovery is driven by the 'Share Creator Button' which allows **streamers and viewers** to introduce friends and followers to your stream through your unique Spiel link through which control can be given back to the user and promotes the involvement human judgment into the equation of internet success. This button can be found under every stream and in the *'Live Tab'*.
 
-Spiel is the just chatting Twitch and Youtube Live alternative live streaming service, Spiel is the private and secure alternative live streaming service, Spiel is the decentralized, user owned and controlled alternative live streaming service, Spiel is waiting for you... Join Us: [spiel.pages.dev](https://spiel.pages.dev/?content=home)
+Spiel is the just chatting Twitch and Youtube Live alternative live streaming service, Spiel is the private and secure alternative live streaming service, Spiel is the decentralized, user owned and controlled alternative live streaming service, Spiel is waiting for you, Join Us: [spiel.pages.dev](https://spiel.pages.dev/?content=home)
+
+### How to get viewers on your stream!
+
+You are not going to go from zero to thousounds of viewers whithout building an identity. When people look for a streamer they are looking for an entataner; Potential viewers wont know if your entertaining unless you show them your skills. The best way to show yourself off is socials. In this guide we will be going over the big three and how to build you identity: Facebook, Twitter (or if you prefer Mastadon) and Reddit. It is vital to have multiple social accounts if you want to expand your viewership!
+
+**Facebook**
+
+Coming soon..
+
+**Twitter (Mastadon aswell)**
+
+Coming soon..
+
+**Reddit**
+
+Coming soon..
+
+**Conclusion**
+
+I hope this gives you some ideas on how to build an identity and gives you insperation for new ideas of promotion. One thing to never forget is that this kind of thing **takes time**, be consistent but not intrusive and enjoy the process of building your brand that represents who you are.
+
+***
 
 ### Support Us
 
 You can support us through:
 
-### [Open Collective](https://www.example.com)
+### [Open Collective](#)
 
 **or**
 
