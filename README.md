@@ -7,17 +7,18 @@ The Just Chatting Twitch and Youtube Live alternative live streaming service: [s
 ### Guides
 
 - [Preface](#preface)
-- [How to get viewers on your stream!](#how-to-get-viewers-on-your-stream!)
-- [Coming Soon...](#)
+- [How to get viewers on your stream!](#how-to-get-viewers-on-your-stream)
+- [Coming Soon...](#guides)
 
 ### Support
 
 - [Support Us](#support-us)
-- [Coming Soon...](#)
+- [Want To Write A Guide?](#want-to-write-a-guide)
+- [Where To Ask Questions](#where-to-ask-questions)
 
 ***
 
-### Preface
+## Preface
 
 [Spiel](https://spiel.pages.dev/?content=home) is the alternative live streaming service that believes in freedom for the creator and independence from the algorithm; This is because we believe in the liberation of the user as the path to a healthy lifestyle for streamers and viewers as well as believing it to be the factor enabling the crafting of content for the soul.
 
@@ -27,36 +28,46 @@ Another objective of Spiel is independence from the algorithm; The algorithm, by
 
 Spiel is the just chatting Twitch and Youtube Live alternative live streaming service, Spiel is the private and secure alternative live streaming service, Spiel is the decentralized, user owned and controlled alternative live streaming service, Spiel is waiting for you, Join Us: [spiel.pages.dev](https://spiel.pages.dev/?content=home)
 
-### How to get viewers on your stream!
+## How to get viewers on your stream!
 
 You are not going to go from zero to thousounds of viewers whithout building an identity. When people look for a streamer they are looking for an entataner; Potential viewers wont know if your entertaining unless you show them your skills. The best way to show yourself off is socials. In this guide we will be going over the big three and how to build you identity: Facebook, Twitter (or if you prefer Mastadon) and Reddit. It is vital to have multiple social accounts if you want to expand your viewership!
 
-**Facebook**
+### Facebook
 
-Coming soon..
+Coming soon...
 
-**Twitter (Mastadon aswell)**
+### Twitter (Mastadon aswell)
 
-Coming soon..
+Coming soon...
 
-**Reddit**
+### Reddit
 
-Coming soon..
+Coming soon...
 
-**Conclusion**
+### Conclusion
 
-I hope this gives you some ideas on how to build an identity and gives you insperation for new ideas of promotion. One thing to never forget is that this kind of thing **takes time**, be consistent but not intrusive and enjoy the process of building your brand that represents who you are.
+I hope this gives you some ideas on how to build an identity and gives you insperation for new ideas of promotion. One thing to never forget is that this kind of thing **takes time**, be consistent but not intrusive and enjoy the process of building a brand that represents you!
 
 ***
 
-### Support Us
+## Where To Ask Questions
+
+You can ask any questions you may have at the following places:
+
+Coming soon...
+
+## Want To Write A Guide?
+
+
+
+## Support Us
 
 You can support us through:
 
-### [Open Collective](#)
+[Open Collective](#support-us)
 
 **or**
 
-### [PayPal (not recommended)](#support-us)
+[PayPal (not recommended)](#support-us)
 
 Thank you for using Spiel!

@@ -40,7 +40,7 @@ const live = `
   </div>
   <script>
     const streamer = user.is.pub;
-    const winLoc = window.location.origin + "/?content=watch%26search=" + streamer;
+    const winLoc = window.location.origin + "?content=watch&search=" + streamer;
     let arr = []; 
     
     const MIMETYPE_VIDEO_AUDIO = 'video/webm; codecs="opus,vp8"';
@@ -151,11 +151,11 @@ const live = `
           <li><a id="reddit" href="">Reddit</a></li>
         </ul>
       <script>
-        document.getElementById("facebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + winLoc;
-        document.getElementById("whatsapp").href = "https://api.whatsapp.com/send?text=Im Live: " + winLoc;
-        document.getElementById("weibo").href = "http://service.weibo.com/share/share.php?url=&appkey=&title=Im Live: " + winLoc + "&pic=&ralateUid=&language=zh_cn";
-        document.getElementById("twitter").href = "https://twitter.com/intent/tweet?url=Im Live: " + winLoc;
-        document.getElementById("reddit").href = "https://www.reddit.com/submit?url=Im Live: " + winLoc;
+        document.getElementById("facebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(winLoc);
+        document.getElementById("whatsapp").href = "https://api.whatsapp.com/send?text=Im Live: " + encodeURIComponent(winLoc);
+        document.getElementById("weibo").href = "http://service.weibo.com/share/share.php?url=&appkey=&title=Im Live: " + encodeURIComponent(winLoc) + "&pic=&ralateUid=&language=zh_cn";
+        document.getElementById("twitter").href = "https://twitter.com/intent/tweet?url=Im Live: " + encodeURIComponent(winLoc);
+        document.getElementById("reddit").href = "https://www.reddit.com/submit?url=Im Live: " + encodeURIComponent(winLoc);
       </script>
     </div>
       <div class="center">
