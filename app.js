@@ -154,8 +154,8 @@ const live = `
         document.getElementById("facebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(winLoc);
         document.getElementById("whatsapp").href = "https://api.whatsapp.com/send?text=Im Live: " + encodeURIComponent(winLoc);
         document.getElementById("weibo").href = "http://service.weibo.com/share/share.php?url=&appkey=&title=Im Live: " + encodeURIComponent(winLoc) + "&pic=&ralateUid=&language=zh_cn";
-        document.getElementById("twitter").href = "https://twitter.com/intent/tweet?url=Im Live: " + encodeURIComponent(winLoc);
-        document.getElementById("reddit").href = "https://www.reddit.com/submit?url=Im Live: " + encodeURIComponent(winLoc);
+        document.getElementById("twitter").href = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(winLoc);
+        document.getElementById("reddit").href = "https://www.reddit.com/submit?url=" + encodeURIComponent(winLoc);
       </script>
     </div>
       <div class="center">
