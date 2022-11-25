@@ -40,7 +40,7 @@ const live = `
   </div>
   <script>
     const streamer = user.is.pub;
-    const winLoc = window.location.origin + "?content=watch&search=" + streamer;
+    const winLoc = window.location.origin + "/?content=watch&search=" + streamer;
     let arr = []; 
     
     const MIMETYPE_VIDEO_AUDIO = 'video/webm; codecs="opus,vp8"';
