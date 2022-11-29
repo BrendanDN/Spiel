@@ -52,11 +52,11 @@ I hope this gives you some ideas on how to build an identity and gives you inspe
 
 ## Where To Ask Questions Or Give Suggestions
 
-You can ask any questions you may have and give any suggestions or **answer any questions** at the issues section of the: [Spiel Github repository issues section](#)
+You can ask any questions you may have and give any suggestions or **answer any questions** at the issues section of the: [Spiel Github repository issues section](https://github.com/BrendanDN/Spiel/issues)
 
 ## Want To Write A Guide?
 
-Do you have a yerning to write a guide? Do you have an idea for a guide that you know will help everyone? Are you a master of blogging? If so we implore you to write any article you would like (related to Spiel) on: [Spiels Github Guides Branch](#)
+Do you have a yerning to write a guide? Do you have an idea for a guide that you know will help everyone? Are you a master of blogging? If so we implore you to write any article you would like (related to Spiel) on: [Spiels Github Guides Branch](https://github.com/BrendanDN/Spiel/tree/README-Guides)
 
 **We would also like editors for Spiels README aswell**
 
