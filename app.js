@@ -53,8 +53,8 @@ const live = `
     //Config for camera recorder
     const CAMERA_OPTIONS = {
       video: {
-        width: 320,
-        height: 280,
+        width: 426,
+        height: 240,
         facingMode: "user",
         frameRate: 24
       }, audio: true
@@ -129,9 +129,9 @@ const live = `
       video_id: "record_video",//Video html element id
       onDataAvailable: gunStreamer.onDataAvailable,//MediaRecorder data available callback
       onRecordStateChange: onRecordStateChange,//Callback for recording state
-      //audioBitsPerSecond: 6000,//Audio bits per second this is the lowest quality
-      //videoBitsPerSecond: 100000,//Video bits per second this is the lowest quality
-      recordInterval: 700,//Interval of the recorder higher will increase delay but more buffering. Lower will not do much. Due limitiation of webm
+      //audioBitsPerSecond: 128000,//Audio bits per second this is the lowest quality
+      //videoBitsPerSecond: 300000,//Video bits per second this is the lowest quality
+      recordInterval: 2000,//Interval of the recorder higher will increase delay but more buffering. Lower will not do much. Due limitiation of webm
       cameraOptions: CAMERA_OPTIONS,//The camera and screencast options see constant
       // experimental: true,//This is custom time interval and very unstable with audio. Only video is more stable is interval quick enough? Audio
       debug: false//For debug logs
