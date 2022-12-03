@@ -185,7 +185,7 @@ const watch = `
       <pre class="large-pre"><b>Emotes: </b></pre>
       <p id="chat"></p>
     </div>
-    <video id="video" autoplay/>
+    <video id="video" autoplay controls/>
     <script>
       const streamer = urlParams.get('search');
       let arr = []
