@@ -41,7 +41,7 @@ const live = `
   <script>
     const streamer = user.is.pub;
     const winLoc = window.location.origin + "/?content=watch&search=" + streamer;
-    let arr = []; 
+    let chat = []; 
     
     const MIMETYPE_VIDEO_AUDIO = 'video/webm; codecs="opus,vp8"';
     const MIMETYPE_VIDEO_ONLY = 'video/webm; codecs="vp8"';
@@ -81,11 +81,11 @@ const live = `
     });
 
     gunDB.get(STREAM_ID + '-chat').get('chat').map().on(function (data) {
-      if (arr.length >= 7) {
-        arr.shift();
+      if (chat.length >= 7) {
+        chat.shift();
       }
-      arr.push(data);
-      document.getElementById('chat').innerHTML = arr.join("");
+      chat.push(data);
+      document.getElementById('chat').innerHTML = chat.join("");
     });
 
     //Config for the GUN GunStreamer
@@ -188,7 +188,7 @@ const watch = `
     <video id="video" autoplay controls/>
     <script>
       const streamer = urlParams.get('search');
-      let arr = []
+      let chat = []
           
       //Basic configurations for mime types
       const MIMETYPE_VIDEO_AUDIO = 'video/webm; codecs="vp8,opus"';
@@ -223,11 +223,11 @@ const watch = `
       }
 
       gunDB.get(streamer + '-chat').get('chat').map().on(function (data) {
-        if (arr.length >= 7) {
-          arr.shift();
+        if (chat.length >= 7) {
+          chat.shift();
         }
-        arr.push(data);
-        document.getElementById('chat').innerHTML = arr.join("");
+        chat.push(data);
+        document.getElementById('chat').innerHTML = chat.join("");
       });
     </script>
   </div>

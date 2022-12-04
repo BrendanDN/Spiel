@@ -38,16 +38,28 @@
       </div>
     </header>
     <script>
+      const pagesSignedIn = {
+        'watch': watch,
+        'signin': home,
+        'signup': home,
+        'live': live,
+        'home': home
+      }
+
+      const pagesSignedOut = {
+        'watch': watch,
+        'signin': signin,
+        'signup': signup,
+        'live': signin,
+        'home': home
+      }
+      
       //Configure GUN to pass to streamer
       const gun = Gun();
       let user = gun.user().recall({sessionStorage: true});
 
       const urlParams = new URLSearchParams(window.location.search);
       const content = urlParams.get('content');
-
-      if (!urlParams.has('content')) {
-        window.location.search = 'content=home';
-      }
       
       function signout() {
         try {
@@ -57,60 +69,39 @@
           alert(err);
         }
       }
-      
-      if (user.is) {
-        document.getElementById("auth").innerHTML = `
-          <ul>
-            <li><button onclick="signout()">Sign Out</button></li>
-          </ul>
-        `;
 
-        switch(content) {
-        case 'watch':
-          document.write(watch);
-          break;
-        case 'signin':
-          document.write(home);
-          break;
-        case 'signup':
-          document.write(home);
-          break;
-        case 'live':
-          document.write(live);
-          break;
-        case 'home':
-          document.write(home);
+      if (!urlParams.has('content')) {
+        window.location.search = 'content=home';
+      }
+
+      switch(user.is) {
+        case undefined:
+          document.getElementById("auth").innerHTML = `
+            <ul>
+              <li><button onclick="window.location.search = 'content=signin'">Sign In</button></li>
+              <li><button onclick="window.location.search = 'content=signup'">Sign Up</button></li>
+            </ul>
+          `;
+          
+          if (pagesSignedOut[content] !== undefined) {
+            document.write(pagesSignedOut[content]);
+          } else {
+            document.write(err404);
+          }
           break;
         default:
-          document.write(err404)
-        }
-      } else {
-        document.getElementById("auth").innerHTML = `
-          <ul>
-            <li><button onclick="window.location.search = 'content=signin'">Sign In</button></li>
-            <li><button onclick="window.location.search = 'content=signup'">Sign Up</button></li>
-          </ul>
-        `;
+          document.getElementById("auth").innerHTML = `
+            <ul>
+              <li><button onclick="signout()">Sign Out</button></li>
+            </ul>
+          `;
 
-        switch(content) {
-        case 'watch':
-          document.write(watch);
+          if (pagesSignedIn[content] !== undefined) {
+            document.write(pagesSignedIn[content]);
+          } else {
+            document.write(err404);
+          }
           break;
-        case 'signin':
-          document.write(signin);
-          break;
-        case 'signup':
-          document.write(signup);
-          break;
-        case 'live':
-          document.write(signin);
-          break;
-        case 'home':
-          document.write(home);
-          break;
-        default:
-          document.write(err404)
-        }
       }
     </script>
     <footer>
