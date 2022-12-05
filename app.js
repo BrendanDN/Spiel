@@ -12,7 +12,7 @@ const live = `
   <aside>
     <div class="center">
       <button class="liveButton" type="button" onclick="gunRecorder.startCamera()">Start Camera</button>
-      <!-- <button type="button" onclick="gunRecorder.startScreenCapture()">Start Screen Capture</button> -->
+      <button class="liveButton" type="button" onclick="gunRecorder.startScreenCapture()">Start Screen Capture</button>
       <button class="liveButton" id="record_button" type="button" onclick="gunRecorder.record()">Start Stream</button>
       <hr>
       <button id="shareButton" onclick="document.getElementById('shareDialog').showModal()">Share Stream</button>
@@ -65,8 +65,8 @@ const live = `
     //Config for camera recorder
     const CAMERA_OPTIONS = {
       video: {
-        width: 426,
-        height: 240,
+        width: 1280,
+        height: 720,
         facingMode: "user",
         frameRate: 24
       }, audio: true
