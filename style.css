@@ -5,7 +5,6 @@
 }
 
 body {
-  height: 100%;
   margin-bottom: 20rem;
   clear: both;
 	background-color: var(--main-bg-color);
@@ -63,6 +62,18 @@ hr {
   flex-direction: row
 }
 
+fieldset {
+  width: 100%;
+  background-color: var(--second-bg-color);
+}
+
+legend {
+  background-color: var(--second-bg-color);
+  color: var(--txt-color);
+  font-size: clamp(2rem, 3vw, 3.5rem);
+  padding: 5px 10px;
+}
+
 .liveButton {
   background-color: var(--second-bg-color);
   border-color: var(--txt-color);
@@ -94,7 +105,7 @@ label {
 }
 
 input[type=text], input[type=password] {
-  min-width: 95%;
+  min-width: 100%;
   padding: 1.2rem 2.0rem;
   margin: 0.8rem;
   box-sizing: border-box;
@@ -116,7 +127,6 @@ input[type=button], input[type=submit] {
   cursor: pointer;
   border-radius: 0.8rem;
   transition-duration: 0.4s;
-  width: 100%;
   float: center;
 }
 
@@ -125,9 +135,7 @@ input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
   color: var(--second-bg-color);
 }
 
-.lAside {
-  min-height: 100%;
-  max-width: 100%;
+aside {
   padding: 1.5rem;
   margin: 1.5rem;
   float: left;
@@ -135,20 +143,9 @@ input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
   overflow: auto;
 }
 
-.rAside {
-  min-height: 100%;
-  max-width: 100%;
-  padding: 1.5rem;
-  margin: 1.5rem;
-  float: right;
-  background-color: var(--second-bg-color);
-  overflow: auto;
-}
-
 @media only screen and (max-width: 768px) {    
-  .lAside, .rAside {
+  aside {
     float: none;
-    max-width: 100%;
   }
 }
 
@@ -160,16 +157,6 @@ input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
   flex-direction: column;
   margin: 1.5rem;
   overflow: auto;
-}
-
-video {
-  width: 100%;
-}
-
-@media only screen and (max-width: 768px) {    
-  video {
-    width: 100%;
-  }
 }
 
 dialog {
@@ -205,32 +192,24 @@ a:hover {
 }
 
 .container {
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
   background-color: var(--second-bg-color);
   color: var(--txt-color);
 }
 
-@media only screen and (max-width: 768px) {    
-  .container {
-    width: 100%;
-    flex-direction: row;
-  }
-}
-
 .list-container {
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   flex-direction: column;
   flex-wrap: wrap;
+  width: 100%;
   background-color: var(--second-bg-color);
   color: var(--txt-color);
 }
@@ -274,8 +253,8 @@ label {
 footer {
   position: fixed;
   bottom: 0rem;
-  width: 100%;
   max-height: 10rem;
+  width: 100%;
   background-color: var(--second-bg-color);
   color: var(--txt-color);
   text-align: center;

@@ -9,14 +9,8 @@ const err404 = `
 
 const live = `
 <main>
-  <div class="center">
-    <div class="container">
-      <label for="streamTitle">Stream Title:</label>
-      <input type="text" id="streamTitle" name="streamTitle">
-    </div>
-  </div>
   <div>
-    <aside class="lAside">
+    <aside>
       <div class="center">
         <button class="liveButton" type="button" onclick="gunRecorder.startCamera()">Start Camera</button>
         <!-- <button type="button" onclick="gunRecorder.startScreenCapture()">Start Screen Capture</button> -->
@@ -29,13 +23,15 @@ const live = `
     </aside>
   </div>
   <div>
-    <div class="center">
-      <div class="container">
+    <div class="container">
+      <div class="center">
+        <label for="streamTitle">Stream Title:</label>
+        <input type="text" id="streamTitle" name="streamTitle">
         <pre class="large-pre"><b>Emotes: </b></pre>
         <p id="chat"></p>
+        <video aria-label='streamer preview' id="record_video" autoplay controls muted/>
+        <video aria-label='viewer preview' id="video" autoplay muted/>
       </div>
-      <video aria-label='streamer preview' id="record_video" autoplay controls muted/>
-      <video aria-label='viewer preview' id="video" autoplay muted/>
     </div>
   </div>
   <script>
@@ -114,7 +110,7 @@ const live = `
           document.getElementById("shareButton").disabled = true;
           gunDB.get('stream-meta').get('meta').get(STREAM_ID).put(document.getElementById("streamTitle").value);
           recordButton.innerText = "Stop Stream";
-          gunDB.get(STREAM_ID + '-chat').get('chat').get(user.is.pub).put(' Welcome! Were Live: ');
+          gunDB.get(STREAM_ID + '-chat').get('chat').get(user.is.pub).put(' Welcome Were Live! ');
           break;
         default:
           document.getElementById("streamTitle").disabled = false;
@@ -168,24 +164,24 @@ const live = `
 
 const watch = `
 <main>
-  <aside aria-label='emote buttons' class="rAside">
-    <ul class="container">
-      <li><button onclick="emotes('👋')">👋 Hi</button></li>
-      <li><button onclick="emotes('🤣')">🤣 LUL</button></li>
-      <li><button onclick="emotes('😞')">😞 L</button></li>
-      <li><button onclick="emotes('😨')">😨 what</button></li>
-      <li><button onclick="emotes('👍')">👍 good</button></li>
-      <li><button onclick="emotes('😴')">😴 Zzz</button></li>
-      <li><button onclick="emotes('🤟')">🤟 Luv U</button></li>
-      <li><button onclick="emotes('🔥')">🔥 FIRE</button></li>
-    </ul>
-  </aside>
   <div class="center">
     <div class="container">
       <pre class="large-pre"><b>Emotes: </b></pre>
       <p id="chat"></p>
+      <div aria-label='emote buttons'>
+        <ul class="container">
+          <li><button onclick="emotes('👋')">👋 Hi</button></li>
+          <li><button onclick="emotes('🤣')">🤣 LUL</button></li>
+          <li><button onclick="emotes('😞')">😞 L</button></li>
+          <li><button onclick="emotes('😨')">😨 what</button></li>
+          <li><button onclick="emotes('👍')">👍 good</button></li>
+          <li><button onclick="emotes('😴')">😴 Zzz</button></li>
+          <li><button onclick="emotes('🤟')">🤟 Luv U</button></li>
+          <li><button onclick="emotes('🔥')">🔥 FIRE</button></li>
+        </ul>
+      </div>
+      <video id="video" autoplay controls/>
     </div>
-    <video id="video" autoplay controls/>
     <script>
       const streamer = urlParams.get('search');
       let chat = []
@@ -261,66 +257,46 @@ const watch = `
 </main>
 `;
 
-const signin = `
+const auth = `
 <main>
-  <div class="center">
-     <div class="container">
-      <h1>Sign In</h1>
-      <a href="?content=signup">Create an account?</a>
-    </div>
-  </div>
-  <div>
-    <form class="center">
-      <label for="alias">Username:</label><br>
-      <input type="text" id="alias"></input><br><br>
-      <label for="pass">Password:</label><br>
-      <input type="password" id="pass"></input><br><br>
-      <input type="button" value="Sign In" onclick="signIn()">
-    </form>
-     <script>
-      window.signIn = function() {
-        user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
-          if (ack.err) {
-            alert(ack.err);
-          } else {
-            location.reload();
-          }
-        });
-      }
-    </script>
-  </div>
-</main>
-`;
+  <form class="center">
+    <fieldset>
+      <legend id="title">Sign In</legend>
+        <label for="alias">Username:</label><br>
+        <input type="text" id="alias"></input><br><br>
+        <label for="pass">Password:</label><br>
+        <input type="password" id="pass"></input><br><br>
+        <input type="button" id="action" value="Sign In" onclick="signIn()">
+    <fieldset>
+  </form>
+  <script>
+    if (content == 'signup') {
+      document.getElementById("title").innerHTML = 'Sign Up'; 
+      document.getElementById("action").value = 'Sign Up';
+      document.getElementById("action").onclick = signUp();
+    } 
+     
+    window.signIn = function() {
+      user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
+        if (ack.err) {
+          alert(ack.err);
+        } else {
+          location.reload();
+        }
+      });
+    }
 
-const signup = `
-<main>
-  <div class="center">
-     <div class="container">
-      <h1>Sign Up</h1>
-      <a href="?content=signin">Already have an account?</a>
-    </div>
-  </div>
-  <div>
-    <form class="center">
-      <label for="alias">Username:</label><br>
-      <input type="text" id="alias"></input><br><br>
-      <label for="pass">Password:</label><br>
-      <input type="password" id="pass"></input><br><br>
-      <input type="button" value="Sign Up" onclick="signUp()">
-    </form>
-    <script>
-      window.signUp = function() {
-        user.create(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
-          if (ack.err) {
-            alert(ack.err);
-          } else {
-            confirm("User created, to continue sign in!");
-            window.location.href="/?content=signin";
-          }
-        });
-      }
-    </script>
-  </div>
+    window.signUp = function() {
+      user.create(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
+        if (ack.err) {
+          alert(ack.err);
+        } else {
+          confirm("User created, to continue sign in!");
+          window.location.href="/?content=signin";
+        }
+      });
+    }
+  </script>
 </main>
 `;
 
