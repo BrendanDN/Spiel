@@ -9,31 +9,41 @@ const err404 = `
 
 const live = `
 <main>
-  <div>
-    <aside>
-      <div class="center">
-        <button class="liveButton" type="button" onclick="gunRecorder.startCamera()">Start Camera</button>
-        <!-- <button type="button" onclick="gunRecorder.startScreenCapture()">Start Screen Capture</button> -->
-        <button class="liveButton" id="record_button" type="button" onclick="gunRecorder.record()">Start Stream</button>
-      </div>
+  <aside>
+    <div class="center">
+      <button class="liveButton" type="button" onclick="gunRecorder.startCamera()">Start Camera</button>
+      <!-- <button type="button" onclick="gunRecorder.startScreenCapture()">Start Screen Capture</button> -->
+      <button class="liveButton" id="record_button" type="button" onclick="gunRecorder.record()">Start Stream</button>
       <hr>
-      <div class="center">
-        <button id="shareButton" onclick="document.getElementById('shareDialog').showModal()">Share Stream</button>
-      </div>
-    </aside>
-  </div>
-  <div>
-    <div class="container">
-      <div class="center">
-        <label for="streamTitle">Stream Title:</label>
-        <input type="text" id="streamTitle" name="streamTitle">
-        <pre class="large-pre"><b>Emotes: </b></pre>
-        <p id="chat"></p>
-        <video aria-label='streamer preview' id="record_video" autoplay controls muted/>
-        <video aria-label='viewer preview' id="video" autoplay muted/>
-      </div>
+      <button id="shareButton" onclick="document.getElementById('shareDialog').showModal()">Share Stream</button>
+    </div>
+   </aside>
+  <div class="container">
+    <div class="center">
+      <label for="streamTitle">Stream Title:</label>
+      <input type="text" id="streamTitle" name="streamTitle">
+      <pre class="large-pre"><b>Emotes: </b></pre>
+      <p id="chat"></p>
+      <video aria-label='streamer preview' id="record_video" autoplay controls muted/>
+      <video aria-label='viewer preview' id="video" autoplay muted/>
     </div>
   </div>
+  <dialog id="shareDialog">
+    <div id="modal" class="center">
+      <div class="center">
+        <ul>
+          <li><a id="facebook" href="" target="_blank">Facebook</a></li>
+          <li><a id="whatsapp" href="" target="_blank">WhatsApp</a></li>
+          <li><a id="weibo" href="">Weibo</a></li>
+          <li><a id="twitter" href="">Twitter</a></li>
+          <li><a id="reddit" href="">Reddit</a></li>
+        </ul>
+      </div>
+      <div class="center">
+        <button onclick="document.getElementById('shareDialog').close()">Close</button>
+      </div>
+    </div>
+  </dialog>
   <script>
     const streamer = user.is.pub;
     const winLoc = window.location.origin + "/?content=watch&search=" + streamer;
@@ -45,6 +55,12 @@ const live = `
 
     const MIME_TYPE_USE = MIMETYPE_VIDEO_AUDIO;//Change to the correct one once you change
     const STREAM_ID = streamer//Probably need a dynamic one make sure your video id is the same for the viewer
+
+    document.getElementById("facebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(winLoc);
+    document.getElementById("whatsapp").href = "https://api.whatsapp.com/send?text=Im Live: " + encodeURIComponent(winLoc);
+    document.getElementById("weibo").href = "http://service.weibo.com/share/share.php?url=&appkey=&title=Im Live: " + encodeURIComponent(winLoc) + "&pic=&ralateUid=&language=zh_cn";
+    document.getElementById("twitter").href = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(winLoc);
+    document.getElementById("reddit").href = "https://www.reddit.com/submit?url=" + encodeURIComponent(winLoc);
 
     //Config for camera recorder
     const CAMERA_OPTIONS = {
@@ -66,16 +82,12 @@ const live = `
 
     var gunViewer = new GunViewer(viewer_config);
 
-    //Configure GUN to pass to streamer
-    var peers = ['https://spiel-server-eu.herokuapp.com/gun', 'https://spiel-server-us.herokuapp.com/gun'];
-    var opt = { peers: peers, localStorage: false, radisk: false };
-    var gunDB = Gun(opt);
-
     // Get data from gun and pass along to viewer
     gunDB.get(STREAM_ID).on(function (data) {
       gunViewer.onStreamerData(data);
     });
-
+    
+    // Get chat data from gun and pass along to viewer
     gunDB.get(STREAM_ID + '-chat').get('chat').map().on(function (data) {
       if (chat.length >= 7) {
         chat.shift();
@@ -136,29 +148,6 @@ const live = `
     //Init the recorder
     const gunRecorder = new GunRecorder(recorder_config);
   </script>
-  <dialog id="shareDialog">
-    <div id="modal" class="center">
-      <div class="center">
-        <ul>
-          <li><a id="facebook" href="" target="_blank">Facebook</a></li>
-          <li><a id="whatsapp" href="" target="_blank">WhatsApp</a></li>
-          <li><a id="weibo" href="">Weibo</a></li>
-          <li><a id="twitter" href="">Twitter</a></li>
-          <li><a id="reddit" href="">Reddit</a></li>
-        </ul>
-      <script>
-        document.getElementById("facebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(winLoc);
-        document.getElementById("whatsapp").href = "https://api.whatsapp.com/send?text=Im Live: " + encodeURIComponent(winLoc);
-        document.getElementById("weibo").href = "http://service.weibo.com/share/share.php?url=&appkey=&title=Im Live: " + encodeURIComponent(winLoc) + "&pic=&ralateUid=&language=zh_cn";
-        document.getElementById("twitter").href = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(winLoc);
-        document.getElementById("reddit").href = "https://www.reddit.com/submit?url=" + encodeURIComponent(winLoc);
-      </script>
-    </div>
-      <div class="center">
-        <button onclick="document.getElementById('shareDialog').close()">Close</button>
-      </div>
-    </div>
-  </dialog>
 </main>
 `;
 
@@ -182,6 +171,26 @@ const watch = `
       </div>
       <video id="video" autoplay controls/>
     </div>
+    <hr>
+    <div class="center">
+      <button onclick="document.getElementById('shareDialog').showModal()">Share Creator</button>
+    </div>
+    <dialog id="shareDialog">
+      <div id="modal" class="center">
+        <div class="center">
+          <ul>
+            <li><a id="facebook" href="" target="_blank">Facebook</a></li>
+            <li><a id="whatsapp" href="" target="_blank">WhatsApp</a></li>
+            <li><a id="weibo" href="">Weibo</a></li>
+            <li><a id="twitter" href="">Twitter</a></li>
+            <li><a id="reddit" href="">Reddit</a></li>
+          </ul>
+        </div>
+        <div class="center">
+          <button onclick="document.getElementById('shareDialog').close()">Close</button>
+        </div>
+      </div>
+    </dialog>
     <script>
       const streamer = urlParams.get('search');
       let chat = []
@@ -189,6 +198,12 @@ const watch = `
       //Basic configurations for mime types
       const MIMETYPE_VIDEO_AUDIO = 'video/webm; codecs="vp8,opus"';
       const MIMETYPE_VIDEO_ONLY = 'video/webm; codecs="vp8"';
+
+      document.getElementById("facebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(window.location);
+      document.getElementById("whatsapp").href = "https://api.whatsapp.com/send?text=" + encodeURIComponent(window.location);
+      document.getElementById("weibo").href = "http://service.weibo.com/share/share.php?url=" + encodeURIComponent(window.location) + "&appkey=&title=&pic=&ralateUid=&language=zh_cn";
+      document.getElementById("twitter").href = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(window.location);
+      document.getElementById("reddit").href = "https://www.reddit.com/submit?url=" + encodeURIComponent(window.location);
 
       //Configure GunViewer 
       var viewer_config = {
@@ -198,11 +213,6 @@ const watch = `
       }
 
       var gunViewer = new GunViewer(viewer_config);
-
-      //Configure GUN to pass to streamer
-      var peers = ['https://spiel-server-eu.herokuapp.com/gun', 'https://spiel-server-us.herokuapp.com/gun'];
-      var opt = { peers: peers, localStorage: false, radisk: false };
-      var gunDB = Gun(opt);
 
       //Get data from gun and pass along to viewer
       gunDB.get(streamer).on(function (data) {
@@ -227,33 +237,6 @@ const watch = `
       });
     </script>
   </div>
-  <hr>
-  <div class="center">
-    <button onclick="document.getElementById('shareDialog').showModal()">Share Creator</button>
-  </div>
-  <dialog id="shareDialog">
-    <div id="modal" class="center">
-      <div class="center">
-        <ul>
-          <li><a id="facebook" href="" target="_blank">Facebook</a></li>
-          <li><a id="whatsapp" href="" target="_blank">WhatsApp</a></li>
-          <li><a id="weibo" href="">Weibo</a></li>
-          <li><a id="twitter" href="">Twitter</a></li>
-          <li><a id="reddit" href="">Reddit</a></li>
-        </ul>
-      <script>
-        document.getElementById("facebook").href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(window.location);
-        document.getElementById("whatsapp").href = "https://api.whatsapp.com/send?text=" + encodeURIComponent(window.location);
-        document.getElementById("weibo").href = "http://service.weibo.com/share/share.php?url=" + encodeURIComponent(window.location) + "&appkey=&title=&pic=&ralateUid=&language=zh_cn";
-        document.getElementById("twitter").href = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(window.location);
-        document.getElementById("reddit").href = "https://www.reddit.com/submit?url=" + encodeURIComponent(window.location);
-      </script>
-    </div>
-      <div class="center">
-        <button onclick="document.getElementById('shareDialog').close()">Close</button>
-      </div>
-    </div>
-  </dialog>
 </main>
 `;
 
@@ -262,20 +245,14 @@ const auth = `
   <form class="center">
     <fieldset>
       <legend id="title">Sign In</legend>
-        <label for="alias">Username:</label><br>
-        <input type="text" id="alias"></input><br><br>
-        <label for="pass">Password:</label><br>
-        <input type="password" id="pass"></input><br><br>
-        <input type="button" id="action" value="Sign In" onclick="signIn()">
+      <label for="alias">Username:</label><br>
+      <input type="text" id="alias"></input><br><br>
+      <label for="pass">Password:</label><br>
+      <input type="password" id="pass"></input><br><br>
+      <input type="button" id="action" value="Sign In" onclick="signIn()">
     <fieldset>
   </form>
   <script>
-    if (content == 'signup') {
-      document.getElementById("title").innerHTML = 'Sign Up'; 
-      document.getElementById("action").value = 'Sign Up';
-      document.getElementById("action").onclick = signUp();
-    } 
-     
     window.signIn = function() {
       user.auth(document.getElementById("alias").value, document.getElementById("pass").value, function(ack) {
         if (ack.err) {
@@ -292,10 +269,16 @@ const auth = `
           alert(ack.err);
         } else {
           confirm("User created, to continue sign in!");
-          window.location.href="/?content=signin";
+          window.location = "/?content=signin";
         }
       });
     }
+    
+    if (content == 'signup') {
+      document.getElementById("title").innerHTML = 'Sign Up'; 
+      document.getElementById("action").value = 'Sign Up';
+      document.getElementById("action").onclick = signUp;
+    } 
   </script>
 </main>
 `;
@@ -304,19 +287,11 @@ const home = `
 <main>
   <div class="center">
     <h1>The Just Chatting Twitch alternative live streaming service</h1>
-  </div>
-  <hr>
-  <div class="center">
     <ul class="list-container" id="streams"></ul>
     <p class="container">Appears you have reached the end of the streamer list, wel done :)</p>
   </div>
   <script>
     const winLoc = window.location.origin + "/?content=watch&search=";
-    
-    //Configure GUN to pass to streamer
-    var peers = ['https://spiel-server-eu.herokuapp.com/gun', 'https://spiel-server-us.herokuapp.com/gun'];
-    var opt = { peers: peers, localStorage: false, radisk: false };
-    var gunDB = Gun(opt);
 
     gunDB.get('stream-meta').get('meta').map().once(async function (data, id) {
       document.getElementById('streams').innerHTML += '<li><pre class="large-pre">' + data + '</pre><a href="' + winLoc + id + '"><button aria-label="Watch ' + data + '">Watch Now</button></a></li>';
