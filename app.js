@@ -11,21 +11,26 @@ const live = `
 <main>
   <aside>
     <div class="center">
-      <button class="liveButton" type="button" onclick="gunRecorder.startCamera()">Start Camera</button>
-      <button class="liveButton" type="button" onclick="gunRecorder.startScreenCapture()">Start Screen Capture</button>
-      <button class="liveButton" id="record_button" type="button" onclick="gunRecorder.record()">Start Stream</button>
+      <button onclick="gunRecorder.startCamera()">Start Camera</button>
+      <button onclick="gunRecorder.startScreenCapture()">Start Screen Capture</button>
+      <button id="record_button" onclick="gunRecorder.record()">Start Stream</button>
       <hr>
       <button id="shareButton" onclick="document.getElementById('shareDialog').showModal()">Share Stream</button>
+      <hr>
+      <pre style="font-size: clamp(1rem, 2vw, 2.5rem)">Emotes:</pre>
+      <p id="chat"></p>
     </div>
    </aside>
-  <div class="container">
-    <div class="center">
-      <label for="streamTitle">Stream Title:</label>
-      <input type="text" id="streamTitle" name="streamTitle">
-      <pre class="large-pre"><b>Emotes: </b></pre>
-      <p id="chat"></p>
-      <video aria-label='streamer preview' id="record_video" autoplay controls muted/>
-      <video aria-label='viewer preview' id="video" autoplay muted/>
+  <div class="center">
+    <div class="container">
+      <ul>
+        <li><label for="streamTitle">Stream Title:</label></li>
+        <li><input type="text" id="streamTitle" name="streamTitle"></li>
+        <li><pre style="font-size: clamp(1rem, 2vw, 2.5rem)">Streamer Preview:</pre></li>
+        <li><video aria-label='streamer preview' width="65%" id="record_video" autoplay controls muted/></li>
+        <li><pre style="font-size: clamp(1rem, 2vw, 2.5rem)">Viewer Preview</pre></li>
+        <li><video aria-label='viewer preview' width="65%" id="video" autoplay muted/></li>
+      </ul>
     </div>
   </div>
   <dialog id="shareDialog">
@@ -155,7 +160,7 @@ const watch = `
 <main>
   <div class="center">
     <div class="container">
-      <pre class="large-pre"><b>Emotes: </b></pre>
+      <pre style="font-size: clamp(1rem, 2vw, 2.5rem)">Emotes: </pre>
       <p id="chat"></p>
       <div aria-label='emote buttons'>
         <ul class="container">
@@ -287,14 +292,14 @@ const home = `
 <main>
   <div class="center">
     <h1>The Just Chatting Twitch alternative live streaming service</h1>
-    <ul class="list-container" id="streams"></ul>
+    <ul class="container" id="streams"></ul>
     <p class="container">Appears you have reached the end of the streamer list, wel done :)</p>
   </div>
   <script>
     const winLoc = window.location.origin + "/?content=watch&search=";
 
     gunDB.get('stream-meta').get('meta').map().once(async function (data, id) {
-      document.getElementById('streams').innerHTML += '<li><pre class="large-pre">' + data + '</pre><a href="' + winLoc + id + '"><button aria-label="Watch ' + data + '">Watch Now</button></a></li>';
+      document.getElementById('streams').innerHTML += '<li><pre>' + data + '</pre style="font-size: clamp(1rem, 2vw, 2.5rem)"><a href="' + winLoc + id + '"><button aria-label="Watch ' + data + '">Watch Now</button></a></li>';
     });
   </script>
 </main>
