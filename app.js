@@ -73,7 +73,7 @@ const live = `
         width: 1280,
         height: 720,
         facingMode: "user",
-        frameRate: 60
+        frameRate: 24
       }, audio: true
     }
 
