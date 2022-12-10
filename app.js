@@ -179,6 +179,7 @@ const watch = `
     <hr>
     <div class="center">
       <button onclick="document.getElementById('shareDialog').showModal()">Share Creator</button>
+      <button onclick="document.getElementById('reportDialog').showModal()">Report</button>
     </div>
     <dialog id="shareDialog">
       <div id="modal" class="center">
@@ -193,6 +194,15 @@ const watch = `
         </div>
         <div class="center">
           <button onclick="document.getElementById('shareDialog').close()">Close</button>
+        </div>
+      </div>
+    </dialog>
+    <dialog id="reportDialog">
+      <div id="modal" class="center">
+        <p>Are You Sure You Want To Report This Streamer!</p>
+        <div class="center">
+          <button onclick="gunDB.get('stream-meta').get('meta').get(streamer).put(null); window.location.search = 'content=home';">Confirm</button>
+          <button onclick="document.getElementById('reportDialog').close()">Close</button>
         </div>
       </div>
     </dialog>
@@ -299,7 +309,9 @@ const home = `
     const winLoc = window.location.origin + "/?content=watch&search=";
 
     gunDB.get('stream-meta').get('meta').map().once(async function (data, id) {
-      document.getElementById('streams').innerHTML += '<li><pre>' + data + '</pre style="font-size: clamp(1rem, 2vw, 2.5rem)"><a href="' + winLoc + id + '"><button aria-label="Watch ' + data + '">Watch Now</button></a></li>';
+      if (data != null) {
+        document.getElementById('streams').innerHTML += '<li><pre>' + data + '</pre style="font-size: clamp(1rem, 2vw, 2.5rem)"><a href="' + winLoc + id + '"><button aria-label="Watch ' + data + '">Watch Now</button></a></li>';
+      }
     });
   </script>
 </main>
