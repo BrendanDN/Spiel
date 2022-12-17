@@ -1,7 +1,7 @@
 {
   "name": "Spiel",
   "short_name": "Spiel",
-  "start_url": "/index.html",
+  "start_url": "/auth.html?auth=signin",
   "display": "standalone",
   "scope": "/",
   "background_color": "#3b3d3d",
