@@ -1,0 +1,38 @@
+{
+  "name": "Spiel",
+  "short_name": "Spiel",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "scope": "/",
+  "background_color": "#3b3d3d",
+  "theme_color": "#49cab0",
+  "orientation": "portrait-primary",
+  "description": "The Just Chatting Twitch and Youtube Live alternative live streaming service",
+  "icons": [
+    {
+      "src": "/img/icons/spiel-16x16.png",
+      "type": "image/png",
+      "sizes": "16x16"
+    },
+    {
+      "src": "/img/favicon.png",
+      "type": "image/png",
+      "sizes": "32x32"
+    },
+    {
+      "src": "/img/icons/spiel-48x48.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "/img/icons/spiel-128x128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "/img/icons/spiel-144x144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    }
+  ]
+}
