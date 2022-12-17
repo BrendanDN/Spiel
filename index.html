@@ -8,110 +8,31 @@
     <meta property="og:title" content="Spiel - Live Streaming" />
     <meta property="og:description" content="The Just Chatting Twitch Youtube Live alternative live streaming service" />
     <meta property="og:image" content="" />
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <script src="./app.js" ></script>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/gun/gun.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/GunRecorder.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/GunStreamer.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/GunViewer.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/mediabuffer.js"></script>
+    <script scr="https://cdn.jsdelivr.net/npm/gun/lib/webrtc.js"></script>
   </head>
   <body id="app">
-    <header>
+    <h-d></h-d>
+    <main>
       <div class="center">
-        <h1>Spiel</h1>
+        <h1>The Just Chatting Twitch alternative live streaming service</h1>
+        <ul class="container" id="streams"></ul>
+        <p class="container">Appears you have reached the end of the streamer list, wel done :)</p>
       </div>
-      <div class="center">
-        <nav>
-          <div>
-            <ul>
-              <li><button onclick="window.location.search = 'content=home'">Home</button></li>
-              <li><button onclick="window.location.search = 'content=live'">Live</button></li>
-              <li><button onclick="window.location.href = 'https://github.com/BrendanDN/Spiel#guides'">Guides</button></li>
-              <li><button onclick="window.location.href = 'https://github.com/BrendanDN/Spiel#support'">Support</button></li>
-            </ul>
-          </div>
-          <hr>
-          <div id="auth"></div>
-        </nav>
-      </div>
-    </header>
-    <script>
-      const pagesSignedIn = {
-        'watch': watch,
-        'signin': home,
-        'signup': home,
-        'live': live,
-        'home': home
-      }
+      <script src="js/stores.js"></script>
+      <script src="js/components.js" defer></script>
+      <script>
+        const winLoc = window.location.origin + "/watch.html?search=";
 
-      const pagesSignedOut = {
-        'watch': watch,
-        'signin': auth,
-        'signup': auth,
-        'live': auth,
-        'home': home
-      }
-
-      //Configure GUN to pass to streamer
-      const peers = ['https://spiel-server-eu.herokuapp.com/gun', 'https://spiel-server-us.herokuapp.com/gun',];
-      const opt = { peers: peers, localStorage: false, radisk: false };
-      const gunDB = Gun(opt);
-      
-      //Configure GUN to pass to streamer
-      const gun = Gun();
-      const user = gun.user().recall({sessionStorage: true});
-
-      const urlParams = new URLSearchParams(window.location.search);
-      const content = urlParams.get('content');
-      
-      function signout() {
-        try {
-          user.leave();
-          location.reload();
-        } catch(err) {
-          alert(err);
-        }
-      }
-
-      if (!urlParams.has('content')) {
-        window.location.search = 'content=home';
-      }
-
-      switch(user.is) {
-        case undefined:
-          document.getElementById("auth").innerHTML = `
-            <ul>
-              <li><button onclick="window.location.search = 'content=signin'">Sign In</button></li>
-              <li><button onclick="window.location.search = 'content=signup'">Sign Up</button></li>
-            </ul>
-          `;
-          
-          if (pagesSignedOut[content] !== undefined) {
-            document.write(pagesSignedOut[content]);
-          } else {
-            document.write(err404);
+        gunDB.get('stream-meta').get('meta').map().once(async function (data, id) {
+          if (data != null) {
+            document.getElementById('streams').innerHTML += '<li><pre>' + data + '</pre style="font-size: clamp(1rem, 2vw, 2.5rem)"><a href="' + winLoc + id + '"><button aria-label="Watch ' + data + '">Watch Now</button></a></li>';
           }
-          break;
-        default:
-          document.getElementById("auth").innerHTML = `
-            <ul>
-              <li><button onclick="signout()">Sign Out</button></li>
-            </ul>
-          `;
-
-          if (pagesSignedIn[content] !== undefined) {
-            document.write(pagesSignedIn[content]);
-          } else {
-            document.write(err404);
-          }
-          break;
-      }
-    </script>
-    <footer>
-      <pre><b>Spiel</b></pre>
-      <button onclick="window.location.href = 'https://github.com/BrendanDN/Spiel#support-us'">Donate</button> 
-    </footer>
+        });
+      </script>
+    </main>
+    <f-t></f-t>
   </body>
 </html>

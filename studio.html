@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="The Just Chatting Twitch alternative live streaming service">
+    <title>Spiel-Studio</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/GunRecorder.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/GunStreamer.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/GunViewer.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/mediabuffer.js"></script>
+  </head>
+  <body>
+    <h-d></h-d>
+   <main>
+      <aside>
+        <div class="center">
+          <button onclick="gunRecorder.startCamera()">Start Camera</button>
+          <button onclick="gunRecorder.startScreenCapture()">Start Screen Capture</button>
+          <button id="record_button" onclick="gunRecorder.record()">Start Stream</button>
+          <button id="download" onclick="clickDownload()">Download</button>
+          <hr>
+          <button id="shareButton" onclick="document.getElementById('shareDialog').showModal()">Share Stream</button>
+          <hr>
+          <pre style="font-size: clamp(1rem, 2vw, 2.5rem)">Emotes:</pre>
+          <p id="chat"></p>
+        </div>
+       </aside>
+      <div class="center">
+        <div class="container">
+          <ul>
+            <li><label for="streamTitle">Stream Title:</label></li>
+            <li><input type="text" id="streamTitle" name="streamTitle"></li>
+            <li><pre style="font-size: clamp(1rem, 2vw, 2.5rem)">Streamer Preview:</pre></li>
+            <li><video aria-label='streamer preview' width="65%" id="record_video" autoplay controls muted/></li>
+            <li><pre style="font-size: clamp(1rem, 2vw, 2.5rem)">Viewer Preview</pre></li>
+            <li><video aria-label='viewer preview' width="65%" id="video" autoplay controls muted/></li>
+          </ul>
+        </div>
+      </div>
+      <dialog id="shareDialog">
+        <div id="modal" class="center">
+          <div class="center">
+             <ul>
+              <li><a id="facebook" href="" target="_blank">Facebook</a></li>
+              <li><a id="whatsapp" href="" target="_blank">WhatsApp</a></li>
+              <li><a id="weibo" href="">Weibo</a></li>
+              <li><a id="twitter" href="">Twitter</a></li>
+              <li><a id="reddit" href="">Reddit</a></li>
+            </ul>
+          </div>
+          <div class="center">
+            <button onclick="document.getElementById('shareDialog').close()">Close</button>
+          </div>
+        </div>
+      </dialog>
+      <script src="js/stores.js"></script>
+      <script src="js/components.js" defer></script>
+      <script src="js/studio.js"></script>
+      <script>
+        if (user.is) {
+          const winLoc = window.location.origin + "/watch.html?search=" + STREAM_ID;
+        
+          document.getElementById("facebook").href = String("https://www.facebook.com/sharer/sharer.php?u=" + winLoc);
+          document.getElementById("whatsapp").href = String("https://api.whatsapp.com/send?text=" + winLoc);
+          document.getElementById("weibo").href = String("http://service.weibo.com/share/share.php?url=" + winLoc + "&appkey=&title=&pic=&ralateUid=&language=zh_cn");
+          document.getElementById("twitter").href = String("https://twitter.com/intent/tweet?url=" + winLoc);
+          document.getElementById("reddit").href = String("https://www.reddit.com/submit?url=" + winLoc);
+        } else {
+          window.location.href = "auth.html"
+        }
+      </script>
+    </main>
+    <f-t></f-t>
+  </body>
+</html>
