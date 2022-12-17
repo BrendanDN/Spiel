@@ -19,9 +19,9 @@
       <aside>
         <div class="center">
           <button onclick="gunRecorder.startCamera()">Start Camera</button>
-          <button onclick="gunRecorder.startScreenCapture()">Start Screen Capture</button>
+          <button onclick="gunRecorder.startScreenCapture()">Start Screen-Capture</button>
           <button id="record_button" onclick="gunRecorder.record()">Start Stream</button>
-          <button id="download" onclick="clickDownload()">Download</button>
+          <button id="download" onclick="clickDownload()">Download Stream</button>
           <hr>
           <button id="shareButton" onclick="document.getElementById('shareDialog').showModal()">Share Stream</button>
           <hr>
@@ -35,9 +35,9 @@
             <li><label for="streamTitle">Stream Title:</label></li>
             <li><input type="text" id="streamTitle" name="streamTitle"></li>
             <li><pre style="font-size: clamp(1rem, 2vw, 2.5rem)">Streamer Preview:</pre></li>
-            <li><video aria-label='streamer preview' width="65%" id="record_video" autoplay controls muted/></li>
+            <li><video aria-label='streamer preview' width="auto" id="record_video" autoplay controls muted/></li>
             <li><pre style="font-size: clamp(1rem, 2vw, 2.5rem)">Viewer Preview</pre></li>
-            <li><video aria-label='viewer preview' width="65%" id="video" autoplay controls muted/></li>
+            <li><video aria-label='viewer preview' width="auto" id="video" autoplay controls muted/></li>
           </ul>
         </div>
       </div>

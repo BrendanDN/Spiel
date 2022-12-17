@@ -33,7 +33,7 @@
               <li><button onclick="emotes('🔥')">🔥 FIRE</button></li>
             </ul>
           </div>
-          <video id="video" autoplay controls/>
+          <video id="video" width="auto" autoplay controls/>
         </div>
         <hr>
         <div class="center">
@@ -101,7 +101,7 @@
             if (user.is){
               gunDB.get(streamer + '-chat').get('chat').get(user.is.pub).put(emoji);
             } else {
-              window.location.search = 'content=signin';
+              window.location.href = 'auth.html?auth=sigin';
             }
           }
 
