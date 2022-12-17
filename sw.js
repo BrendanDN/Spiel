@@ -1,6 +1,6 @@
 const today = new Date();
 const date = String(today.getFullYear())+String((today.getMonth()+1))+String(today.getDate());
-const staticCache = parseInt(date);
+const dynamicCache = parseInt(date);
 const assets = [
   '/',
   '/index.html',
@@ -21,7 +21,7 @@ self.addEventListener('install', evt => {
   console.log("Service Worker Has Been Installed")
   
   evt.waitUntil(
-    caches.open(staticCache).then(cache => {
+    caches.open(dynamicCache).then(cache => {
       console.log('Caching Shell Assets');
       cache.addAll(assets);
     })
@@ -35,7 +35,7 @@ self.addEventListener('activate', evt => {
   evt.waitUntil(
     caches.keys().then(keys => {
       return Promise.all(keys
-        .filter(key => key < staticCache)
+        .filter(key => key < dynamicCache)
         .map(key => caches.delete(key))
       )
     })
@@ -48,7 +48,12 @@ self.addEventListener('fetch', evt => {
 
   evt.respondWith(
     caches.match(evt.request).then(cacheRes => {
-      return cacheRes || fetch(evt.request);
+      return cacheRes || fetch(evt.request).then(fetchRes => {
+        return caches.open(dynamicCache).then(cache => {
+          cache.put(evt.request.url, fetchRes.clone());
+          return fetchRes;
+        })
+      })
     })
   );
 })
