@@ -5,15 +5,14 @@ const assets = [
   '/',
   '/index.html',
   '/auth.html',
-  '/auth.html?/auth=signin',
-  '/auth.html?/auth=signup',
   '/studio.html',
   '/watch.html',
   '/js/stores.js',
   '/js/components.js',
   '/css/style.css',
   'https://cdn.jsdelivr.net/npm/gun/gun.min.js',
-  'https://cdn.jsdelivr.net/npm/gun/sea.js'
+  'https://cdn.jsdelivr.net/npm/gun/sea.js',
+  '/fallback.html'
 ];
 
 //install listner
@@ -54,6 +53,6 @@ self.addEventListener('fetch', evt => {
           return fetchRes;
         })
       })
-    })
+    }).catch(() => caches.match('/fallback.html'))
   );
 })
