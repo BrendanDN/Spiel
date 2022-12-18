@@ -1,5 +1,5 @@
 const today = new Date();
-const date = String(today.getFullYear())+String((today.getMonth()+1))+String(today.getDate());
+const date = String(today.getFullYear())+String((today.getMonth()+1))+String(today.getDate())+String(today.getHours())+String(('0'+ today.getMinutes()).slice(-2));
 const dynamicCache = parseInt(date);
 const assets = [
   '/',
