@@ -1,5 +1,5 @@
 //Configure GUN to pass to streamer
-const peers = ['https://spiel-server-eu.herokuapp.com/gun', 'https://spiel-server-us.herokuapp.com/gun',];
+const peers = ['https://spiel-server-eu.herokuapp.com/gun', 'https://spiel-server-us.herokuapp.com/gun', 'https://relay.peer.ooo/gun', 'https://gun-manhattan.herokuapp.com/gun', 'https://peer.wallie.io/gun'];
 const opt = { peers: peers, localStorage: false, radisk: false };
 const gunDB = Gun(opt);
 
