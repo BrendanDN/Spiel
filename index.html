@@ -31,7 +31,7 @@
       <script>
         const winLoc = window.location.origin + "/watch.html?search=";
 
-        gunDB.get('stream-meta').get('meta').map().once(async function (data, id) {
+        gun.get('stream-meta').get('meta').map().once(async function (data, id) {
           if (data != null) {
             document.getElementById('streams').innerHTML += '<li><pre>' + data + '</pre style="font-size: clamp(1rem, 2vw, 2.5rem)"><a href="' + winLoc + id + '"><button aria-label="Watch ' + data + '">Watch Now</button></a></li>';
           }

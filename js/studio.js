@@ -34,7 +34,7 @@ let chat = [];
         });
     
         // Get chat data from gun and pass along to viewer
-        gunDB.get(STREAM_ID + '-chat').get('chat').map().on(function (data) {
+        gun.get(STREAM_ID + '-chat').get('chat').map().on(function (data) {
           if (chat.length >= 7) {
             chat.shift();
           }
