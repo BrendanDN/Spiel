@@ -34,7 +34,7 @@ let chat = [];
         });
     
         // Get chat data from gun and pass along to viewer
-        gun.get(STREAM_ID + '-chat').get('chat').map().on(function (data) {
+        gunDB.get(STREAM_ID + '-chat').get('chat').map().on(function (data) {
           if (chat.length >= 7) {
             chat.shift();
           }
@@ -49,7 +49,7 @@ let chat = [];
           gun: gunDB,//Gun instance
           debug: false,//For debug logs
           onStreamerData: gunViewer.onStreamerData,//If you want manually handle the data manually
-          url: "https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/parser_worker.js"//webworker load remote
+          url: "https://cdn.jsdelivr.net/gh/QVDev/GunStreamer/js/parser_worker.js"//webworker load remote
         }
 
         //GUN Streamer is the data side. It will convert data and write to GUN db

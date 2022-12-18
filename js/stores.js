@@ -4,7 +4,7 @@ const opt = { peers: peers, localStorage: false, radisk: false };
 const gunDB = Gun(opt);
 
 //Configure GUN to pass to streamer
-const gun = Gun({ peers: peers });
+const gun = Gun();
 const user = gun.user().recall({sessionStorage: true});
 
 if('serviceWorker' in navigator){

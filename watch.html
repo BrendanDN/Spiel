@@ -78,7 +78,7 @@
           let chat = []
           
           //Basic configurations for mime types
-          const MIMETYPE_VIDEO_AUDIO = 'video/webm; codecs="vp8,opus"';
+          const MIMETYPE_VIDEO_AUDIO = 'video/webm; codecs="opus,vp8"';
           const MIMETYPE_VIDEO_ONLY = 'video/webm; codecs="vp8"';
 
           document.getElementById("facebook").href = String("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url));
@@ -110,7 +110,7 @@
             }
           }
 
-          gun.get(streamer + '-chat').get('chat').map().on(function (data) {
+          gunDB.get(streamer + '-chat').get('chat').map().on(function (data) {
             if (chat.length >= 7) {
               chat.shift();
             }
