@@ -4,14 +4,9 @@ const dynamicCache = parseInt(date);
 const assets = [
   '/',
   '/index.html',
-  '/auth.html',
-  '/studio.html',
-  '/watch.html',
   '/js/stores.js',
   '/js/components.js',
   '/css/style.css',
-  'https://cdn.jsdelivr.net/npm/gun/gun.min.js',
-  'https://cdn.jsdelivr.net/npm/gun/sea.js',
   '/fallback.html'
 ];
 
