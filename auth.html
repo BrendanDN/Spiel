@@ -20,18 +20,22 @@
     <script src="https://cdn.jsdelivr.net/npm/gun/lib/store.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gun/lib/rindexed.js"></script>
   </head>
-  <body>
-    <h-d></h-d>
+  <body style="background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAJpJREFUKFNNUdERwlAMgqF0Bv3wdNTe9UNn6FIokNb2eq8phJDk8b4tD5B4X54rQBCAciDHIKATP9fXKhKQrIFkWtYdMUmaB6mWoqaO/w1NgchsBX9KTrT7h/43RblY7epZMqFbOojaJ3cKHzMZa+K4tMVOfRK0mby1qaDTlvSgQQea5Z2toxmH27Y8uC80C0wHHmrWJCIX8nu+1uBSL5X+G7UAAAAASUVORK5CYII=')">
     <main>
-      <form class="center">
-        <fieldset>
-        <legend id="title">Sign In</legend>
-        <label for="alias">Username:</label><br>
-        <input type="text" id="alias"></input><br><br>
-        <label for="pass">Password:</label><br>
-        <input type="password" id="pass"></input><br><br>
-        <input type="button" id="action" value="Sign In" onclick="signIn()">
-      </form>
+      <dialog open>
+        <div class="center">
+          <a id="anchor" href="?auth=signup">Create An Account?</a>
+        </div>
+        <form class="center">
+          <fieldset>
+          <legend id="title">Sign In</legend>
+          <label for="alias">Username:</label><br>
+          <input type="text" id="alias"></input><br><br>
+          <label for="pass">Password:</label><br>
+          <input type="password" id="pass"></input><br><br>
+          <input type="button" id="action" value="Sign In" onclick="signIn()">
+        </form>
+      </dialog>
       <script src="js/stores.js"></script>
       <script src="js/components.js" defer></script>
       <script>
@@ -63,6 +67,8 @@
           document.getElementById("title").innerHTML = 'Sign Up'; 
           document.getElementById("action").value = 'Sign Up';
           document.getElementById("action").onclick = signUp;
+          document.getElementById("anchor").innerHTML = 'Sign In?';
+          document.getElementById("anchor").href = '?auth=signin';
         } 
       </script>
     </main>

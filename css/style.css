@@ -98,9 +98,14 @@ aside {
 }
 
 dialog {
+  position: fixed;
+  bottom: 7.5rem;
+  max-width: 75%;
   padding: 0.6rem; 
   border-radius: 0.6rem;
+  color: var(--txt-color);
   background-color: var(--second-bg-color);
+  border: none;
   box-shadow: 0 0 1em var(--txt-color);
 }
 
