@@ -6,7 +6,7 @@
   "scope": "/",
   "background_color": "#3b3d3d",
   "theme_color": "#49cab0",
-  "orientation": "portrait-primary",
+  "orientation": "natural",
   "description": "The Just Chatting Twitch and Youtube Live alternative live streaming service",
   "icons": [
     {
