@@ -1,5 +1,5 @@
 const today = new Date();
-const date = String(today.getFullYear())+String((today.getMonth()+1))+String(today.getDate())+String(today.getHours())+String(('0'+ today.getMinutes()).slice(-2));
+const date = String(today.getFullYear())+String((today.getMonth()+1))+String(today.getDate())+String(today.getHours())+String(today.getMinutes());
 const dynamicCache = parseInt(date);
 const assets = [
   '/',
@@ -40,7 +40,7 @@ self.addEventListener('activate', evt => {
   evt.waitUntil(
     caches.keys().then(keys => {
       return Promise.all(keys
-        .filter(key => key < dynamicCache)
+        .filter(key => key !== dynamicCache)
         .map(key => caches.delete(key))
       )
     })
