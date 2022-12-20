@@ -9434,9 +9434,9 @@ function VideoStreamMerger (opts) {
   if (!supported) {
     throw new Error('Unsupported browser')
   }
-  self.width = opts.width || 1280
-  self.height = opts.height || 720
-  self.fps = opts.fps || 24
+  self.width = opts.width || 426
+  self.height = opts.height || 240
+  self.fps = opts.fps || 16
   self.clearRect = opts.clearRect === undefined ? true : opts.clearRect
 
   // Hidden canvas element for merging
@@ -9532,8 +9532,8 @@ VideoStreamMerger.prototype.addMediaElement = function (id, element, opts) {
 
   opts.x = opts.x || 0
   opts.y = opts.y || 0
-  opts.width = opts.width || 1280
-  opts.height = opts.height || 720
+  opts.width = 854
+  opts.height = 480
   opts.mute = opts.mute || opts.muted || false
 
   opts.oldDraw = opts.draw
@@ -9593,8 +9593,8 @@ VideoStreamMerger.prototype.addStream = function (mediaStream, opts) {
   stream.isData = false
   stream.x = opts.x || 0
   stream.y = opts.y || 0
-  stream.width = opts.width || 1280
-  stream.height = opts.height || 720
+  stream.width = 854
+  stream.height = 480
   stream.draw = opts.draw || null
   stream.mute = opts.mute || opts.muted || false
   stream.audioEffect = opts.audioEffect || null
@@ -12854,9 +12854,9 @@ function WBS (element, opts) {
 
   mixer.setAudioContext(audioContext)
   opts.output = opts.output || {
-    width: 400 * 3,
-    height: 300 * 3,
-    fps: 40,
+    width: 854,
+    height: 480,
+    fps: 16,
     audioContext: audioContext
   }
   opts.inputs = opts.inputs || []
@@ -13107,8 +13107,8 @@ function Scene (output, mixerEffect, opts) {
   var self = this
   
   opts = opts || {}
-  opts.width = opts.width || 400*3
-  opts.height = opts.height || 400*3
+  opts.width = opts.width || 854
+  opts.height = opts.height || 480
   
   self.sources = []
   

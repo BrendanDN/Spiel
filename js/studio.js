@@ -13,6 +13,8 @@
 
 /* globals MediaRecorder */
 const MIME_TYPE_USE = MIMETYPE_VIDEO_AUDIO;
+const STREAM_ID = user.is.pub;
+
 const mediaSource = new MediaSource();
 mediaSource.addEventListener('sourceopen', function(){
   console.log('MediaSource opened');
@@ -40,8 +42,11 @@ let sourceBuffer;
 // });
 
 function custmOnDataAvailable(event) {
-  if (event.data &&  event.data.size > 0) {
+  if (event.data && event.data.size > 0) {
     recordedBlobs.push(event.data);
+  }
+
+  if (event.data.size > 0) {
     var blob = event.data;
     var response = new Response(blob).arrayBuffer().then(function (arrayBuffer) {
       blob = null;
@@ -74,7 +79,7 @@ function startRecording(stream) {
         console.log('Recorder stopped: ', event);
     };
     mediaRecorder.ondataavailable = custmOnDataAvailable;
-    mediaRecorder.start(100);
+    mediaRecorder.start(2000);
     console.log('MediaRecorder started', mediaRecorder);
 }
 
