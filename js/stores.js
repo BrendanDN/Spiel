@@ -7,6 +7,11 @@ const gunDB = Gun(opt);
 const gun = Gun({peers: peers});
 const user = gun.user().recall({sessionStorage: true});
 
+const MIMETYPE_VIDEO_AUDIO = 'video/webm; codecs="opus,vp8"';
+const MIMETYPE_VIDEO_ONLY = 'video/webm; codecs="vp8"';
+const MIMETYPE_AUDIO_ONLY = 'video/webm; codecs="opus"';
+const STREAM_ID = user.is.pub
+
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('sw.js')
     .then((reg) => console.log("Service Worker Registered!", reg))

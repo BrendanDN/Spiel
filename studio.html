@@ -1,84 +1,76 @@
-<!DOCTYPE html>
-<html lang="en-GB">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="The Just Chatting Twitch alternative live streaming service">
-    <title>Spiel-Studio</title>
-    <meta name="theme-color" content="#49cab0"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="#49cab0" />
-    <link rel="icon" href="img/icons/maskable_icon_x128.png">
-    <link rel="apple-touch-icon" href="img/icons/maskable_icon_x128.png">
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <link href="manifest.json" rel="manifest" />
-    <script src="https://cdn.jsdelivr.net/npm/gun/gun.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer/js/GunRecorder.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer/js/GunStreamer.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer/js/GunViewer.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer/js/mediabuffer.js"></script>
-  </head>
-  <body>
-    <h-d></h-d>
-   <main>
-      <aside>
-        <div class="center">
-          <button onclick="gunRecorder.startCamera()">Start Camera</button>
-          <button onclick="gunRecorder.startScreenCapture()">Start Screen-Capture</button>
-          <button id="record_button" onclick="gunRecorder.record()">Start Stream</button>
-          <button id="download" onclick="clickDownload()">Download Stream</button>
-          <hr>
-          <button id="shareButton" onclick="document.getElementById('shareDialog').showModal()">Share Stream</button>
-          <hr>
-          <pre style="font-size: clamp(1rem, 2vw, 2.5rem)">Emotes:</pre>
-          <p id="chat"></p>
-        </div>
-       </aside>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spiel-Studio</title>
+  <meta property="og:title" content="Spiel-Studio" />
+  <meta property="og:description" content="The Just Chatting Twitch Youtube Live alternative live streaming service" />
+  <meta property="og:image" content="" />
+  <meta name="theme-color" content="#49cab0"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="#49cab0" />
+  <link rel="icon" href="img/icons/maskable_icon_x128.png">
+  <link rel="apple-touch-icon" href="img/icons/maskable_icon_x128.png">
+  <link href="manifest.json" rel="manifest" />
+  <script src="https://cdn.jsdelivr.net/npm/gun/gun.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer/js/GunStreamer.js"></script>
+</head>
+
+<body>
+  <!-- <h1 id="intro" style="font-family: Arial; text-align: center;">Welcome to broadcast studio
+    <br>click anywhere to start</h1> -->
+  <section></section>
+  <dialog id="shareDialog">
+    <ul>
+      <li><a id="facebook" href="" target="_blank">Facebook</a></li>
+      <li><a id="whatsapp" href="" target="_blank">WhatsApp</a></li>
+      <li><a id="weibo" href="">Weibo</a></li>
+      <li><a id="twitter" href="">Twitter</a></li>
+      <li><a id="reddit" href="">Reddit</a></li>
       <div class="center">
-        <div class="container">
-          <ul>
-            <li><label for="streamTitle">Stream Title:</label></li>
-            <li><input type="text" id="streamTitle" name="streamTitle"></li>
-            <li><pre style="font-size: clamp(1rem, 2vw, 2.5rem)">Streamer Preview:</pre></li>
-            <li><video aria-label='streamer preview' width="auto" id="record_video" autoplay controls muted/></li>
-            <li><pre style="font-size: clamp(1rem, 2vw, 2.5rem)">Viewer Preview</pre></li>
-            <li><video aria-label='viewer preview' width="auto" id="video" autoplay controls muted/></li>
-          </ul>
-        </div>
+        <button onclick="document.getElementById('shareDialog').close()">Close</button>
       </div>
-      <dialog id="shareDialog">
-        <div id="modal" class="center">
-          <div class="center">
-             <ul>
-              <li><a id="facebook" href="" target="_blank">Facebook</a></li>
-              <li><a id="whatsapp" href="" target="_blank">WhatsApp</a></li>
-              <li><a id="weibo" href="">Weibo</a></li>
-              <li><a id="twitter" href="">Twitter</a></li>
-              <li><a id="reddit" href="">Reddit</a></li>
-            </ul>
-          </div>
-          <div class="center">
-            <button onclick="document.getElementById('shareDialog').close()">Close</button>
-          </div>
-        </div>
-      </dialog>
-      <script src="js/stores.js"></script>
-      <script src="js/components.js" defer></script>
-      <script src="js/studio.js"></script>
-      <script>
-        if (user.is) {
-          const winLoc = window.location.origin + "/watch.html?search=" + STREAM_ID;
-        
-          document.getElementById("facebook").href = String("https://www.facebook.com/sharer/sharer.php?u=" + winLoc);
-          document.getElementById("whatsapp").href = String("https://api.whatsapp.com/send?text=" + winLoc);
-          document.getElementById("weibo").href = String("http://service.weibo.com/share/share.php?url=" + winLoc + "&appkey=&title=&pic=&ralateUid=&language=zh_cn");
-          document.getElementById("twitter").href = String("https://twitter.com/intent/tweet?url=" + winLoc);
-          document.getElementById("reddit").href = String("https://www.reddit.com/submit?url=" + winLoc);
-        } else {
-          window.location.href = "auth.html"
-        }
-      </script>
-    </main>
-    <f-t></f-t>
-  </body>
+    </ul>
+  </dialog>
+</body>
+<script src="js/wbs.js"></script>
+<script src="js/stores.js"></script>
+<script src="js/studio.js"></script>
+<script>
+  if (user.is) {
+    //Config for the GUN GunStreamer
+    var streamer_config = {
+      dbRecord: "gunmeeting",//The root of the streams
+      streamId: STREAM_ID,//The user id you wanna stream  
+      gun: gunDB,//Gun instance
+      debug: false,//For debug logs    
+      url: "https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/parser_worker.js"//webworker load remote
+    }
+
+    //GUN Streamer is the data side. It will convert data and write to GUN db
+    const gunStreamer = new GunStreamer(streamer_config)
+
+    const OPTS = {
+      output: {
+        width: 1280,  // resolution of the output stream
+        height: 720,
+        fps: 24       // frames per second of the output stream
+      },
+      injectStyles: true // whether to inject the WBS css
+    }
+    
+    var wbs = new WBS('section', [OPTS])
+
+    wbs.on('stream', function (stream) {
+      console.log("received stream " + stream)
+      startRecording(stream);
+    })
+    wbs.on('stopstream', function () {
+      stopRecording();
+      console.log("Stopped streaming");
+    })
+  } else {
+    window.location.href = "auth.html?auth=signin"
+  }
+</script>
 </html>
