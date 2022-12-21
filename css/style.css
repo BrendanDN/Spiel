@@ -16,6 +16,20 @@ header {
   background-color: var(--second-bg-color);
 }
 
+form {
+  animation: transitionIn 1.5s;
+}
+
+@keyframes transitionIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 button, 
 input[type=button] {
   background-color: var(--second-bg-color);
