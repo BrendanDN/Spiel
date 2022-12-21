@@ -38,7 +38,7 @@
               <li><button onclick="emotes('🔥')">🔥 FIRE</button></li>
             </ul>
           </div>
-          <video id="video" width="auto" autoplay muted controls/>
+          <video id="video" width="auto" autoplay controls/>
         </div>
         <hr>
         <div class="center">
@@ -76,6 +76,10 @@
           const url = new URL(window.location);
           const streamer = url.searchParams.get('search');
           let chat = []
+          
+          //Basic configurations for mime types
+          const MIMETYPE_VIDEO_AUDIO = 'video/webm; codecs="opus,vp8"';
+          const MIMETYPE_VIDEO_ONLY = 'video/webm; codecs="vp8"';
 
           document.getElementById("facebook").href = String("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url));
           document.getElementById("whatsapp").href = String("https://api.whatsapp.com/send?text=" + encodeURIComponent(url));
