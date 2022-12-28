@@ -13,7 +13,7 @@
 
 <body>
   <div>
-    <label for="title">Stream Title: </label>
+    <label class="label" for="title">Stream Title: </label>
     <input type="text" id="title" name="title">
   </div>
   <section></section>
@@ -71,4 +71,19 @@
       window.location.href = "auth.html?auth=signin"
     }
 </script>
+<style>
+  input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+
+  .label {
+    display: block;
+    text-align: center;
+    font-size: clamp(1rem, 3vw, 4rem);
+    padding: clamp(0.5rem, 1vw, 1.5rem);
+  }
+</style>
 </html>
