@@ -6,25 +6,29 @@
   <title>ivecodestream</title>
   <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gun/lib/not.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/gun/lib/yson.js"></script> -->
   <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/GunStreamer.js"></script>
   <link rel="shortcut icon" href="../images/icons/favicon.ico">
 </head>
 
 <body>
+  <div>
+    <label for="title">Stream Title: </label>
+    <input type="text" id="title" name="title">
+  </div>
   <section></section>
 </body>
 <script src="js/wbs.js"></script>
 <script src="js/stores.js"></script>
 <script src="js/recorder.js"></script>
 <script>
-    const STREAM_ID = getID();
+    const YOUR_ID = getID();
 
     const OPTS = {
       output: {
         width: 1280,  // resolution of the output stream
         height: 720,
-        fps: 24       // frames per second of the output stream
+        fps: 16       // frames per second of the output stream
       },
       injectStyles: true // whether to inject the WBS css
     }
@@ -40,7 +44,7 @@
     //Config for the GUN GunStreamer
     var streamer_config = {
       dbRecord: "gunmeeting",//The root of the streams
-      streamId: STREAM_ID,//The user id you wanna stream  
+      streamId: YOUR_ID,//The user id you wanna stream  
       gun: gunDB,//Gun instance
       debug: false,//For debug logs    
       url: "https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/parser_worker.js"//webworker load remote
@@ -55,6 +59,8 @@
       wbs.on('stream', function (stream) {
         console.log("received stream " + stream)
         startRecording(stream);
+        let metaData = gunDB.get('metadata_' + YOUR_ID).put({ title: document.getElementById("title").value, streamId: YOUR_ID });
+        gunDB.get('gunmeeting_metadata').set(metaData);
       })
       
       wbs.on('stopstream', function () {

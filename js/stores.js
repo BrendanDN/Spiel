@@ -5,7 +5,7 @@ const MIME_TYPE_USE = MIMETYPE_VIDEO_AUDIO;
 
 //Configure GUN to pass to streamer
 const peers = ['https://spiel-server-eu.herokuapp.com/gun', 'https://spiel-server-us.herokuapp.com/gun', 'https://relay.peer.ooo/gun', 'https://gun-manhattan.herokuapp.com/gun', 'https://peer.wallie.io/gun'];
-const opt = { peers: peers, localStorage: false, radisk: false };
+const opt = { peers: ['https://spiel-server-eu.herokuapp.com/gun', 'https://spiel-server-us.herokuapp.com/gun'], localStorage: false, radisk: false };
 const gunDB = Gun(opt);
 
 //Configure GUN to pass to streamer

@@ -12547,7 +12547,7 @@ Controls.prototype.clickStream = function () {
 
 Controls.prototype.clickShare = function () {
   var self = this
-  window.open(location.origin + "/view.html#" + STREAM_ID, '_blank');
+  window.open(location.origin + "/view.html#" + YOUR_ID, '_blank');
 }
 
 Controls.prototype.clickDownload = function () {

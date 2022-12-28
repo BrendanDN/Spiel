@@ -5,7 +5,7 @@ let USER_METADATA = 'metadata_' + STREAM_ID;
 const chat = []
 
 function sentMessage(input) {
-  sentControlData({ text: input, like: false });
+  sentControlData({ msg: input });
 }
 
 function sentControlData(data) {
@@ -21,8 +21,12 @@ function receiveData() {
           return
         }
 
-        if (data.text && data.streamId == STREAM_ID) {
-          SETCLUE(data.text);
+        if (data.msg && data.streamId == STREAM_ID) {
+          SETCLUE(data.msg);
+        }
+
+        if (data.title && data.streamId == STREAM_ID) {
+          document.getElementById("user_stream").innerHTML = data.title;
         }
     });
 }
