@@ -24,7 +24,7 @@
       </div>
       <H1 id="stream_count" style="display:inline"></H1>
       <div class="container">
-        <video id="video" width="60%" height="33.75%" data-role="video"
+        <video id="video" width="60%" data-role="video"
           data-poster="https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/fe186655756437.5992117fb6ee1.gif"
           data-logo="../images/logo.png" data-logo-height="25" data-logo-target="https://metroui.org.ua/v4/"
           data-volume=".0" data-show-loop="false" data-show-stop="false" data-show-play="false"
@@ -43,8 +43,10 @@
   </main>
   <script src="js/stores.js"></script>
   <script src="js/components.js" defer></script>
-  <script src="js/metadata.js"></script>
   <script>
+    const url = new URL(window.location);
+    const STREAM_ID = url.searchParams.get('id');
+
     //Change to correct id
     document.getElementById("video").id = STREAM_ID;
 

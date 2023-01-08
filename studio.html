@@ -6,83 +6,60 @@
   <title>Spiel-Studio</title>
   <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gun/sea.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/GunRecorder.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/GunStreamer.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/GunViewer.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/mediabuffer.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="shortcut icon" href="../images/icons/favicon.ico">
 </head>
 
 <body>
-  <div>
-    <label class="label" for="title">Stream Title: </label>
-    <input type="text" id="title" name="title">
-  </div>
-  <section></section>
+  <header>
+    <div class="center">
+      <a href="/"><button>Home</button></a>
+    </div>
+  </header>
+  <main>
+    <aside>
+      <h2>EMOTES</h2>
+      <div id="emotes"></div>
+    </aside>
+    <div class="center">
+      <div class="container">
+        <div class="center">
+          <h2>Streamer Preview:</h2>
+          <video id="record_video" width="60%" autoplay controls muted></video>
+          <h2>Viewer Preview:</h2>
+          <video id="streamid" width="60%" autoplay controls muted></video>
+        </div>
+        <div>
+          <form>
+            <label for="title">Title: </label>
+            <input id="title" type="text" oninput="addProfiel({title: document.getElementById('title').value});"></input>
+            <label for="uname">By: </label>
+            <input id="uname" type="text" oninput="addProfiel({uname: document.getElementById('uname').value});"></input>
+            <label for="description">Description: </label>
+            <textarea id="description" rows="4" cols="30" maxlength="150" oninput="addProfiel({description: document.getElementById('description').value});">Description...</textarea>
+          </form>
+        </div>
+      </div>
+      <div class="container">
+        <button type="button" onclick="gunRecorder.startCamera()">Start Camera</button>
+        <button id="record_button" type="button" onclick="gunRecorder.record()">Start Recording</button>
+        <button id="download" type="button" onclick="window.open('/view.html?id=' + YOUR_ID)">Share Stream</button>
+        <button id="download" type="button" onclick="Download()">Download Stream</button>
+      </div>
+    </div>
+  </main>
 </body>
-<script src="js/wbs.js"></script>
 <script src="js/stores.js"></script>
-<script src="js/recorder.js"></script>
+<script src="js/integration.js"></script>
 <script>
-    const YOUR_ID = getID();
+  function addProfiel(data) {
+    gun.get('profile').get(YOUR_ID).put(data);
+  }
 
-    const OPTS = {
-      output: {
-        width: 1280,  // resolution of the output stream
-        height: 720,
-        fps: 24      // frames per second of the output stream
-      },
-      injectStyles: true // whether to inject the WBS css
-    }
-
-    function getID() {
-      if (location.hash == "") {
-        return crypto.getRandomValues(new Uint32Array(1)).toString(36).substring(2, 8);
-      } else {
-        return location.hash.replace("#", "");
-      }
-    }
-
-    //Config for the GUN GunStreamer
-    var streamer_config = {
-      dbRecord: "gunmeeting",//The root of the streams
-      streamId: YOUR_ID,//The user id you wanna stream  
-      gun: gunDB,//Gun instance
-      debug: false,//For debug logs    
-      url: "https://cdn.jsdelivr.net/gh/QVDev/GunStreamer@0.0.9/js/parser_worker.js"//webworker load remote
-    }
-
-    //GUN Streamer is the data side. It will convert data and write to GUN db
-    const gunStreamer = new GunStreamer(streamer_config)
-
-    if (user.is) {
-      var wbs = new WBS('section', [OPTS])
-
-      wbs.on('stream', function (stream) {
-        console.log("received stream " + stream)
-        startRecording(stream);
-        let metaData = gunDB.get('metadata_' + YOUR_ID).put({ title: document.getElementById("title").value, streamId: YOUR_ID });
-        gunDB.get('gunmeeting_metadata').set(metaData);
-      })
-      
-      wbs.on('stopstream', function () {
-        stopRecording();
-        console.log("Stopped streaming");
-      })
-    } else {
-      window.location.href = "auth.html?auth=signin"
-    }
+  addProfiel({id: YOUR_ID});
 </script>
-<style>
-  input[type=text] {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-  }
-
-  .label {
-    display: block;
-    text-align: center;
-    font-size: clamp(1rem, 3vw, 4rem);
-    padding: clamp(0.5rem, 1vw, 1.5rem);
-  }
-</style>
 </html>

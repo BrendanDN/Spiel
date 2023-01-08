@@ -45,7 +45,8 @@ form {
 }
 
 button, 
-input[type=button] {
+input[type=button],
+input[type=submit]{
   background-color: var(--second-bg-color);
   border-color: var(--txt-color);
   padding: clamp(0.5rem, 1vw, 1.5rem);
@@ -61,7 +62,8 @@ input[type=button] {
 }
 
 button:hover, 
-input[type=button]:hover {
+input[type=button]:hover,
+input[type=submit]:hover {
   background-color: var(--txt-color);
   border-color: var(--txt-color);
   color: var(--second-bg-color);
@@ -72,6 +74,16 @@ button[disabled]{
   border: 1px solid #303131;
   background-color: #1a1919;
   color: #1b5045;
+}
+
+input[type=search] {
+  width: 100%;
+  float: left;
+  padding: 0.6rem;
+  border: none;
+  margin-top: 0.8rem;
+  margin-right: 1.6rem;
+  font-size: 1.7rem;
 }
 
 hr {
@@ -160,7 +172,9 @@ a:hover {
 }
 
 .container {
-  width: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -170,15 +184,28 @@ a:hover {
   background-color: var(--second-bg-color);
 }
 
+.vid-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: var(--second-bg-color);
+  padding: 1rem;
+}
+
 h1 {
   font-size: clamp(2rem, 3vw, 3.5rem);
   margin: 0.67em, 0;
   font-weight: bold;
 }
 
+h3 {
+  margin: 0.5rem;
+}
+
 p {
-  font-size: clamp(1rem, 1.5vw, 2rem);
-  margin: clamp(0.5rem, 1vw, 1.7rem);
+  font-size: clamp(0.5rem, 0.75vw, 1rem);
+  margin: clamp(0.5rem, 0.75vw, 1rem);
+  word-break: break-word;
 }
 
 form {

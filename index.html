@@ -22,24 +22,35 @@
     <h-d></h-d>
     <main>
       <div class="center">
-        <h1>The alternative live streaming service to Twitch</h1>
-        <ul class="container" id="streams"></ul>
-        <p class="container">Appears you have reached the end of the streamer list, wel done :)</p>
+        <form>
+          <input type="search" placeholder="Search..." id="search" name="search"/>
+          <input type="button" value="search" onclick="queryContent()"/>
+        </form>
+      </div>
+      <div>
+        <ul id="content" ></ul>
       </div>
       <script src="js/stores.js"></script>
       <script src="js/components.js" defer></script>
       <script>
-        const winLoc = window.location.origin + "/view.html#";
-
-        gunDB.get('gunmeeting_metadata').map().on(function (data, id) {
-          if (!data) {
-            return
-          }
-
-          if (data.title) {
-             document.getElementById('streams').innerHTML += '<li><pre>' + data.title + '</pre style="font-size: clamp(1rem, 2vw, 2.5rem)"><a href="' + winLoc + data.streamId + '"><button aria-label="Watch ' + data.title + '">Watch Now</button></a></li>';
-          }
-        });
+        window.queryContent = function () {
+          document.getElementById("content").innerHTML = "";
+          
+          gun.get('profile').map().once(function (stream) {
+            if (stream.title.toUpperCase().includes(document.getElementById("search").value.toUpperCase())) {
+              document.getElementById("content").innerHTML += `<li class="vid-card">
+                <div>
+                  <img scr="">
+                  <a href="/view.html?id=` + stream.id +`"><button>Watch Now</button></a>
+                </div>
+                <div>
+                  <h3>` + stream.title + `</h3>
+                  <p>Description: ` + stream.description + `</p>
+                </div>
+              </li>`;
+            }
+          });
+        }
       </script>
     </main>
     <f-t></f-t>
