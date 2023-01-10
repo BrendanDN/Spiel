@@ -20,6 +20,9 @@ const gunDB = Gun(opt);
 //Configure GUN to pass to streamer
 const gun = Gun({peers: peers});
 const user = gun.user().recall({sessionStorage: true});
+let name;
+
+user.get("alias").on(data => {name = data});
 
 if('serviceWorker' in navigator){
   navigator.serviceWorker.register('sw.js')

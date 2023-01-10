@@ -31,7 +31,7 @@
           data-show-pause="false" data-show-stream="false" controls></video>
         <div>
           <pre>Chat: </pre>
-          <p id="chat"></p>
+          <div id="chat"></div>
           <div class="container">
             <button onclick="sentMessage('😃')">😃</button>
             <button onclick="sentMessage('🤣')">🤣</button>
@@ -64,6 +64,18 @@
     gunDB.get(STREAM_ID).on(function (data) {
       gunViewer.onStreamerData(data);
     });
+
+    gun.get("chat").get(STREAM_ID).map().on(function (data) {
+      document.getElementById("chat").innerHTML += data
+    });
+
+    function sentMessage(emoji) {
+      if (user.is) {
+        gun.get("chat").get(STREAM_ID).get(name).put(emoji);
+      } else {
+        window.location = "/auth.html"
+      }
+    }
   </script>
   <f-t></f-t>
 </body>
